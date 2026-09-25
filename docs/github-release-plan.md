@@ -1,4 +1,4 @@
-# GitHub preparation — Portable Omni Server
+# GitHub publication — Portable Omni Server
 
 ## Repository identity
 
@@ -7,11 +7,11 @@
 | Owner | `aivrar` |
 | Distro and launcher foundation | [aivrar/portable-linux-in-a-box](https://github.com/aivrar/portable-linux-in-a-box) |
 | Repository name | `Portable_Omni_Server` |
-| Intended URL | `https://github.com/aivrar/Portable_Omni_Server` |
+| Repository URL | `https://github.com/aivrar/Portable_Omni_Server` |
 | Default branch | `main` |
 | App name | Omni Studio |
 | License for original project work | MIT; preserve third-party terms |
-| Suggested description | AI music generation, ComfyUI image/video workflows, multimodal chat and sound effects in one portable local AI studio. ACE-Step, MiniMax Music 3, Stable Audio and Qwen Omni, with model management, multi-GPU controls, a media library, CLI and API. A Linux distro; Windows requires WSL2. |
+| Description | AI music generation, ComfyUI image/video workflows, multimodal chat and sound effects in one portable local AI studio. ACE-Step, MiniMax Music 3, Stable Audio and Qwen Omni, with model management, multi-GPU controls, a media library, CLI and API. A Linux distro; Windows requires WSL2. |
 
 ## GitHub discovery metadata
 
@@ -21,7 +21,7 @@ serve searches for those tools. Keep the Linux distro identity and WSL2
 requirement in the description and prominent in README; the topic slots are
 reserved for capabilities and relevant model/engine communities.
 
-The description above is 285 characters. Proposed topics (20):
+The published description above is 285 characters. Published topics (20):
 
 ```text
 ai-music ai-music-generator music-generation text-to-music
@@ -46,8 +46,8 @@ monthly search volume or a ranking guarantee. Keep `omni` paired with the
 more specific `qwen-omni` and `multimodal-ai` terms because the word alone
 has multiple meanings. Do not use unrelated product names as traffic bait.
 
-This metadata is prepared locally for publication; it has not been applied
-to a remote repository.
+This metadata is applied to the public repository and was checked against
+GitHub's API after publication.
 
 ## Product presentation
 
@@ -58,11 +58,13 @@ supported-feature list and factual compatibility instructions in the manual.
 Complete the release work below before describing the packaged download as
 finished; copy changes do not establish installer or model test results.
 
-The authenticated GitHub CLI account was verified as `aivrar` on September 25,
-2026. The repository lookup returned 404 for that account at preparation time.
-This is a preparation record, not a claim that the remote repository exists.
+The public repository was created under `aivrar` on September 25, 2026.
+Its default branch is `main`; the initial source commit is
+[`bc47b8e`](https://github.com/aivrar/Portable_Omni_Server/commit/bc47b8e97d56447c86d3cf849db015558e5618d4).
+The [publication record](../reports/2026-09-25-source-publication.md) describes
+the exact source boundary and checks.
 
-## Prepared locally
+## Published contents
 
 - README uses the new repository identity and credits `aivrar` and the
   `portable-linux-in-a-box` foundation. Internal app/distro identifiers retain
@@ -76,22 +78,20 @@ This is a preparation record, not a claim that the remote repository exists.
   images remain eligible for Git.
 - [Portability](portability.md) documents actual runtime containment and the
   host Python relay dependency, missing prepared export, and fresh-PC test gap.
-- `origin` is configured to the intended repository URL. No remote repository
-  was created, and no files were committed or pushed during this preparation.
+- `origin` points to the public repository; local `main` tracks `origin/main`.
 
-## Source publication work
+## Source publication record
 
-1. Review the intended initial tree, especially historical reports and retained
-   fixtures, for personal content and redistribution scope.
-2. Keep the live VHDX, tokens, generated media, caches and local packaged
-   binaries out of the source commit. Review the exact staged file list.
-3. Run focused source/documentation checks. Do not use the known-disruptive
-   broad Windows test campaign on this interactive host.
-4. Create the remote repository with the intended visibility, make the reviewed
-   initial commit, and push `main` when publication is requested.
-5. Configure the repository description/topics and link the manual. If a
-   separate wiki is wanted, copy its reviewed pages and images and resolve links
-   back to the source repository.
+- [x] Review the exact initial file list, credential-pattern scan and retained
+  report/fixture publication scope.
+- [x] Exclude the live VHDX, tokens, generated media, caches and local packaged
+  binaries; verify the remote Git tree contains only the intended source assets.
+- [x] Run focused source/documentation checks from a clean staged checkout.
+- [x] Create the public repository and push the initial commit to `main`.
+- [x] Apply and verify the description, 20 topics, manual homepage and MIT license.
+- [x] Enable the repository wiki.
+- [ ] Populate the separate wiki after the maintainer creates its first page;
+  adapt manual/image links for that checkout. The in-repo manual is available now.
 
 ## Packaged release work
 

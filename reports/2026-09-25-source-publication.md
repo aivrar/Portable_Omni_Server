@@ -57,3 +57,19 @@ No model workers, Comfy workflows, dependency installers, distro exports or
 gateway restarts were run for these publication checks. The source repository
 and a downloadable installed-distro archive are separate artifacts; this
 publication does not include the user's working Linux disk.
+
+## Published repository
+
+- URL: [aivrar/Portable_Omni_Server](https://github.com/aivrar/Portable_Omni_Server)
+- Visibility: public; default branch: `main`.
+- Initial source commit: `bc47b8e97d56447c86d3cf849db015558e5618d4`.
+- GitHub's remote tree matched the 407-file initial commit, including all 18
+  manual PNGs and executable modes for the Linux entrypoints.
+- GitHub's API confirmed the agreed 285-character description, all 20 topics,
+  MIT license recognition and enabled wiki. The repository homepage links to
+  the manual directory.
+- An unauthenticated web read confirmed the public README and its prominent
+  Linux distro / Windows WSL2 requirements.
+
+The separate wiki awaits its first page from the maintainer. No installed-distro
+archive or Windows executable was uploaded as part of this source publication.
