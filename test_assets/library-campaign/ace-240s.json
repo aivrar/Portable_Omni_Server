@@ -1,0 +1,12 @@
+{
+  "prompt": "long-form minimal hypnotic techno instrumental, 126 BPM, dry kick, restrained sub bass, sparse metallic clicks, gradual development through intro, groove, breakdown, peak and outro, clean club mix, no vocals",
+  "negative_prompt": "speech, singing, clipping, muddy bass, abrupt silence",
+  "duration_s": 240,
+  "steps": 8,
+  "cfg_scale": 1.0,
+  "scheduler": "dpmpp",
+  "seed": 2026081160,
+  "bf16": true,
+  "overlapped_decode": true,
+  "autospawn": false
+}

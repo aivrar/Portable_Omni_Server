@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omni Studio</title>
+    <link rel="stylesheet" href="/static/style.css?v=18">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%2358a6ff'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+</head>
+<body>
+    <svg class="icon-sprite" aria-hidden="true">
+        <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9h-6v-6h-4v6H4z"/></symbol>
+        <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 4z"/></symbol>
+        <symbol id="icon-flow" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7.5 8l3.3 7.5M16.5 8l-3.3 7.5"/></symbol>
+        <symbol id="icon-media" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m5 17 4-4 3 3 2-2 5 4"/></symbol>
+        <symbol id="icon-voice" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></symbol>
+        <symbol id="icon-audio" viewBox="0 0 24 24"><path d="M4 13v-2M8 16V8M12 20V4M16 16V8M20 13v-2"/></symbol>
+        <symbol id="icon-music" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12M9 10l10-2"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></symbol>
+        <symbol id="icon-spark" viewBox="0 0 24 24"><path d="m12 3 1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7zM18 16l.8 2.2L21 19l-2.2.8L18 22l-.8-2.2L15 19l2.2-.8z"/></symbol>
+        <symbol id="icon-models" viewBox="0 0 24 24"><path d="m12 3 8 4-8 4-8-4zM4 12l8 4 8-4M4 17l8 4 8-4"/></symbol>
+        <symbol id="icon-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01M11 7h6M11 17h6"/></symbol>
+        <symbol id="icon-comfy" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="3" width="6" height="6" rx="1"/><rect x="9" y="15" width="6" height="6" rx="1"/><path d="M9 6h6M6 9v3h6v3M18 9v3h-6"/></symbol>
+        <symbol id="icon-test" viewBox="0 0 24 24"><path d="M9 3h6M10 3v5l-5 9a3 3 0 0 0 2.6 4.5h8.8A3 3 0 0 0 19 17l-5-9V3M7.5 16h9"/></symbol>
+        <symbol id="icon-log" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+        <symbol id="icon-power" viewBox="0 0 24 24"><path d="M12 3v9M6.3 6.3a8 8 0 1 0 11.4 0"/></symbol>
+    </svg>
+
+    <header class="app-topbar">
+        <button id="nav-toggle" class="icon-button nav-toggle" type="button" aria-label="Open navigation" aria-controls="app-sidebar" aria-expanded="false">
+            <svg><use href="#icon-menu"></use></svg>
+        </button>
+        <div class="brand" aria-label="Omni Studio">
+            <span class="brand-mark" aria-hidden="true"><span></span></span>
+            <span class="brand-copy"><strong>Omni Studio</strong><small>Local multimodal workspace</small></span>
+        </div>
+        <div class="page-context" aria-live="polite">
+            <span id="page-section">Workspace</span>
+            <strong id="page-title">Home</strong>
+        </div>
+        <div class="topbar-actions">
+            <span id="gateway-badge" class="status-pill status-neutral"><span class="status-dot"></span><span class="status-copy">Connecting...</span></span>
+            <button id="app-shutdown-btn" class="app-shutdown-btn" type="button" title="Unload models and stop Omni Studio">
+                <svg aria-hidden="true"><use href="#icon-power"></use></svg><span>Shutdown</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="app-frame">
+        <aside id="app-sidebar" class="app-sidebar" aria-label="Application navigation">
+            <nav class="primary-nav" aria-label="Primary" role="tablist" aria-orientation="vertical">
+                <div class="nav-group">
+                    <div class="nav-group-label">Workspace</div>
+                    <button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="tab-setup" data-tab="setup" data-title="Home" data-section="Workspace"><svg><use href="#icon-home"></use></svg><span>Home</span></button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-chat" data-tab="chat" data-title="Chat" data-section="Workspace"><svg><use href="#icon-chat"></use></svg><span>Chat</span></button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-media" data-tab="media" data-title="Media library" data-section="Workspace"><svg><use href="#icon-media"></use></svg><span>Media library</span></button>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-group-label">ComfyUI</div>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-workflows" data-tab="workflows" data-title="Workflows" data-section="ComfyUI"><svg><use href="#icon-flow"></use></svg><span>Workflows</span></button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-comfy" data-tab="comfy" data-title="ComfyUI engine" data-section="ComfyUI"><svg><use href="#icon-comfy"></use></svg><span>Engine &amp; queue</span></button>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-group-label">Audio</div>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-tts" data-tab="tts" data-title="Voice &amp; TTS" data-section="Audio"><svg><use href="#icon-voice"></use></svg><span>Voice &amp; TTS</span><span class="nav-badge">Soon</span></button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-audio-lab" data-tab="audio-lab" data-title="Audio Lab" data-section="Audio"><svg><use href="#icon-audio"></use></svg><span>Audio Lab</span></button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-ace-step" data-tab="ace-step" data-title="Music" data-section="Audio"><svg><use href="#icon-music"></use></svg><span>Music</span></button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-minimax-music3" data-tab="minimax-music3" data-title="MiniMax Music 3" data-section="Audio"><svg><use href="#icon-music"></use></svg><span>Music 3</span></button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-moss" data-tab="moss" data-title="MOSS" data-section="Audio"><svg><use href="#icon-spark"></use></svg><span>MOSS</span></button>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-group-label">Models &amp; runtime</div>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-models" data-tab="models" data-title="Model library" data-section="Models &amp; runtime"><svg><use href="#icon-models"></use></svg><span>Model library</span></button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-server" data-tab="server" data-title="Runtime" data-section="Models &amp; runtime"><svg><use href="#icon-server"></use></svg><span>Runtime</span></button>
+                </div>
+
+                <details class="nav-advanced">
+                    <summary>Developer tools</summary>
+                    <div class="nav-group nav-group-nested">
+                        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-testing" data-tab="testing" data-title="Testing" data-section="Developer tools"><svg><use href="#icon-test"></use></svg><span>Testing</span></button>
+                        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-log" data-tab="log" data-title="Logs" data-section="Developer tools"><svg><use href="#icon-log"></use></svg><span>Logs</span></button>
+                    </div>
+                </details>
+            </nav>
+            <div class="sidebar-note">
+                <span class="sidebar-note-dot"></span>
+                <span><strong>Local workspace</strong><small>Models and output stay in this distro</small></span>
+            </div>
+        </aside>
+        <button id="nav-scrim" class="nav-scrim" type="button" aria-label="Close navigation" tabindex="-1"></button>
+
+        <main id="main-content" tabindex="-1">
+            <section id="tab-setup" class="tab-content active" role="tabpanel" aria-labelledby="nav-setup"></section>
+            <section id="tab-server" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-comfy" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-workflows" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-models" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-chat" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-media" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-tts" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-moss" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-audio-lab" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-ace-step" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-minimax-music3" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-testing" class="tab-content" role="tabpanel" hidden></section>
+            <section id="tab-log" class="tab-content" role="tabpanel" hidden></section>
+        </main>
+    </div>
+
+    <div id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+    <script src="/static/app.js?v=18"></script>
+    <script src="/static/tab-setup.js?v=15"></script>
+    <script src="/static/tab-server.js?v=14"></script>
+    <script src="/static/tab-comfy.js?v=14"></script>
+    <script src="/static/tab-workflows.js?v=11"></script>
+    <script src="/static/tab-models.js?v=21"></script>
+    <script src="/static/tab-chat.js?v=11"></script>
+    <script src="/static/tab-media.js?v=11"></script>
+    <script src="/static/tab-tts.js?v=2"></script>
+    <script src="/static/tab-moss.js?v=1"></script>
+    <script src="/static/tab-audio-lab.js?v=17"></script>
+    <script src="/static/tab-ace-step.js?v=11"></script>
+    <script src="/static/tab-minimax-music3.js?v=1"></script>
+    <script src="/static/tab-testing.js?v=10"></script>
+    <script src="/static/tab-log.js?v=8"></script>
+</body>
+</html>

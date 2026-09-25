@@ -1,0 +1,13 @@
+{
+  "model": "moss_tts",
+  "variant": "local-v1.5",
+  "device": "cuda:1",
+  "placement": {
+    "mode": "single",
+    "eligible_devices": ["GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a"],
+    "primary_device": "GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a",
+    "reserve_mb": 1024,
+    "require_all": false,
+    "allow_cpu": false
+  }
+}

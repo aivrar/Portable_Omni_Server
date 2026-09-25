@@ -1,0 +1,6 @@
+{
+  "sa_variant": "sao-open-1.0",
+  "vae_variant": "sao-vae-tuned-100k",
+  "clap_variant": "larger-clap-music",
+  "device": "cuda:0"
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Omni Studio",
+    "distro": "linbox-Omni_Studio",
+    "deps": "python, base, git",
+    "setup": "export OMNI_SETUP_REV=20260925_audit_repairs; for omni_source in \"${OMNI_STUDIO_SOURCE_DIR:-}\" \"$PWD\" /opt/omni_studio/source /mnt/*/linux/template/app/apps/Omni_Studio; do [ -n \"$omni_source\" ] || continue; if [ -f \"$omni_source/server/setup.sh\" ] && [ -f \"$omni_source/app.json\" ]; then bash \"$omni_source/server/setup.sh\"; exit $?; fi; done; echo \"Omni Studio source not found; set OMNI_STUDIO_SOURCE_DIR to the clone root inside Linux.\" >&2; exit 1",
+    "start": "/opt/omni_studio/venv/bin/python3 /opt/omni_studio/bridge.py",
+    "port": 9200,
+    "bridge_port": 9200,
+    "width": 1440,
+    "height": 900,
+    "terminal": true,
+    "snapshot": false
+}

@@ -1,0 +1,83 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {"image": "first-frame-fullbody.png"}
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {"image": "last-frame-wave.png"}
+  },
+  "3": {
+    "class_type": "OmniH3StageFL2VConditioning",
+    "inputs": {
+      "clip_name": "qwen3vl_4b_fp8_scaled.safetensors",
+      "projection": "h3_qwen3vl_4b_tap24.safetensors",
+      "video_vae_name": "minimax_h3_video_vae_fp16.safetensors",
+      "prompt": "A cinematic full-body portrait of the same person. They begin standing calmly, then naturally raise one hand into a friendly wave while maintaining identity, clothing, facial features, and the original background. Subtle breathing, realistic blinking, stable anatomy, smooth deliberate motion, no camera cut. Audio: quiet room ambience, soft clothing movement, and the person clearly says, 'Hello, it is good to see you.'",
+      "width": 352,
+      "height": 608,
+      "length": 73,
+      "clip_device": "auxiliary:1",
+      "vae_device": "primary",
+      "first_frame": ["1", 0],
+      "last_frame": ["2", 0]
+    }
+  },
+  "4": {
+    "class_type": "OmniH3ReferenceStrength",
+    "inputs": {
+      "conditioning": ["3", 0],
+      "visual_reference_strength": 0.999,
+      "audio_reference_strength": 1.0
+    }
+  },
+  "5": {
+    "class_type": "OmniH3StageSampler",
+    "inputs": {
+      "conditioning": ["4", 0],
+      "latent": ["3", 1],
+      "unet_name": "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+      "weight_dtype": "default",
+      "noise_seed": 424242,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "steps": 12,
+      "denoise": 1.0,
+      "device": "primary",
+      "spectrum_enabled": true,
+      "spectrum_blend_weight": 0.5,
+      "spectrum_audio_blend_weight": 0.0,
+      "spectrum_offline_smoothing_replay": true
+    }
+  },
+  "6": {
+    "class_type": "OmniH3StageDecode",
+    "inputs": {
+      "samples": ["5", 0],
+      "video_vae_name": "minimax_h3_video_vae_fp16.safetensors",
+      "audio_vae_name": "minimax_h3_audio_vae_fp32.safetensors",
+      "video_device": "primary",
+      "audio_device": "primary"
+    }
+  },
+  "7": {
+    "class_type": "CreateVideo",
+    "inputs": {
+      "images": ["6", 0],
+      "audio": ["6", 1],
+      "fps": 24.0,
+      "bit_depth": 8
+    }
+  },
+  "8": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": ["7", 0],
+      "filename_prefix": "capability_tests/H3_ClipProj_FL2V_Spectrum050_FullStaged",
+      "format": "mp4",
+      "codec": "h264",
+      "codec.encoding": "re-encode",
+      "codec.encoding.crf": 18.0
+    }
+  }
+}

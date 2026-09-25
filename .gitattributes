@@ -1,0 +1,8 @@
+* text=auto
+*.sh text eol=lf
+omni-cli text eol=lf
+*.bat text eol=crlf
+*.png binary
+*.wav binary
+*.mp4 binary
+*.json text eol=lf

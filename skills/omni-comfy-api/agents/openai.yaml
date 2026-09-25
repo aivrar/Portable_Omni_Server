@@ -1,0 +1,7 @@
+interface:
+  display_name: "Omni Comfy API"
+  short_description: "Operate Comfy workflows and GPU placement safely"
+  default_prompt: "Use $omni-comfy-api to inspect, plan, and run this ComfyUI workflow safely."
+
+policy:
+  allow_implicit_invocation: true

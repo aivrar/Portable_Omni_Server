@@ -1,0 +1,4 @@
+interface:
+  display_name: "Omni Model API"
+  short_description: "Safely operate standalone multimodal model workers"
+  default_prompt: "Use $omni-model-api to analyze and run a standalone Omni model with safe GPU placement."

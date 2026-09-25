@@ -1,0 +1,10 @@
+{
+  "model_variant": "ace-sft",
+  "lm_variant": "ace-lm-0.6b",
+  "vae_variant": "default",
+  "bf16": true,
+  "cpu_offload": false,
+  "int8": false,
+  "torch_compile": false,
+  "device": "cuda:1"
+}

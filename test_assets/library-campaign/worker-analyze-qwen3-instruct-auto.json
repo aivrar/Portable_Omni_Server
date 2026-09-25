@@ -1,0 +1,12 @@
+{
+  "model": "qwen3_omni",
+  "variant": "instruct",
+  "placement": {
+    "mode": "auto",
+    "eligible_devices": ["cuda:0", "cuda:1"],
+    "primary_device": "cuda:1",
+    "reserve_mb": 1024,
+    "require_all": true,
+    "allow_cpu": false
+  }
+}

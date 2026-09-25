@@ -1,0 +1,9 @@
+{
+  "action": "uninstall",
+  "instance_id": "comfy-cuda1-8188",
+  "node": "ComfyUI-WanVideoWrapper",
+  "dry_run": false,
+  "auto_restart": true,
+  "timeout_s": 600,
+  "expected_nodes": []
+}

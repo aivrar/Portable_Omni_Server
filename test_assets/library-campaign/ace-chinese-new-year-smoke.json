@@ -1,0 +1,10 @@
+{
+  "prompt": "Chinese New Year celebration music, bright traditional percussion, festive strings and modern electronic polish, instrumental",
+  "negative_prompt": "speech, clipping, muddy mix",
+  "duration_s": 10,
+  "steps": 8,
+  "cfg_scale": 1.0,
+  "scheduler": "euler",
+  "seed": 2026081151,
+  "autospawn": false
+}

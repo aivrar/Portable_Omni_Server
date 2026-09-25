@@ -1,0 +1,7 @@
+interface:
+  display_name: "Omni Audio API"
+  short_description: "Operate music, speech, and audio workflows safely"
+  default_prompt: "Use $omni-audio-api to inspect, run, and verify this Omni audio workflow safely."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,10 @@
+{
+  "prompt": "minimal techno instrumental loop, tight dry kick, restrained sub bass, sparse metallic percussion, no vocals",
+  "negative_prompt": "speech, singing, clipping, muddy bass",
+  "duration_s": 10,
+  "steps": 50,
+  "cfg_scale": 7.0,
+  "sampler": "dpmpp-3m-sde",
+  "seed": 2026081202,
+  "autospawn": false
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "check": "Idle baseline",
+    "status": "passed",
+    "detail": "{\"workers\": 0, \"comfy\": 0}"
+  },
+  {
+    "check": "Home draft retention across live poll",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "401 session reacquisition and automatic reconnect",
+    "status": "passed",
+    "detail": "Browser-only fault; no gateway restart"
+  },
+  {
+    "check": "Disconnected badge recovers automatically after transport failure",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "Chat attachment gates follow implemented modalities",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "Chat session create/select/delete",
+    "status": "passed",
+    "detail": "Only the newly created empty session was deleted; no inference"
+  },
+  {
+    "check": "Music 3 layout, disabled unloaded generation, refresh draft retention",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "Runtime copyable API address uses browser bridge origin",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "Media filename filter and grid/list switching",
+    "status": "passed",
+    "detail": "Public screenshot uses an empty filter; no existing media is published"
+  },
+  {
+    "check": "Three audio state reads do not autospawn workers",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "Comfy installation status settles without starting an engine",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "Workflow JSON validation and unsaved draft retention",
+    "status": "passed",
+    "detail": "No save, download, analyze or queue mutation"
+  },
+  {
+    "check": "Shutdown confirmation cancellation leaves app running",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "Narrow-window navigation opens and closes with Escape and scrim",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "Home fits a 390 px viewport without document overflow",
+    "status": "passed",
+    "detail": ""
+  },
+  {
+    "check": "Final idle registries and no uncaught JavaScript exceptions",
+    "status": "passed",
+    "detail": "{\"workers\": 0, \"comfy\": 0}"
+  }
+]

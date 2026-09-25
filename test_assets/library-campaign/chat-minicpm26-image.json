@@ -1,0 +1,7 @@
+{
+  "model": "minicpm_o",
+  "text": "State the jacket color and the background color in one short sentence.",
+  "max_new_tokens": 48,
+  "temperature": 0.2,
+  "top_p": 0.9
+}

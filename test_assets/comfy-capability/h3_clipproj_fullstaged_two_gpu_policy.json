@@ -1,0 +1,19 @@
+{
+  "mode": "auto",
+  "eligible_devices": [
+    "GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a",
+    "GPU-80c24f57-c604-b55c-5433-5d248304eec9"
+  ],
+  "primary_device": "GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a",
+  "reserve_mb": 512,
+  "device_reserve_mb": {},
+  "overrides": {
+    "3:clip": "GPU-80c24f57-c604-b55c-5433-5d248304eec9",
+    "3:vae": "GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a",
+    "5:model": "GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a",
+    "6:video_vae": "GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a",
+    "6:audio_vae": "GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a"
+  },
+  "require_all": false,
+  "allow_cpu": false
+}

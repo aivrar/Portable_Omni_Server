@@ -1,0 +1,10 @@
+{
+  "prompt": "ethereal wordless female vocal texture, layered sustained vowels, spacious cathedral reverb, no instruments, no intelligible lyrics",
+  "negative_prompt": "spoken words, drums, clipping, harsh distortion",
+  "duration_s": 10,
+  "steps": 50,
+  "cfg_scale": 7.0,
+  "sampler": "dpmpp-3m-sde",
+  "seed": 2026081206,
+  "autospawn": false
+}

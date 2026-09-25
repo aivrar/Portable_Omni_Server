@@ -1,0 +1,5 @@
+{
+  "sa_variant": "sao-open-small",
+  "clap_variant": "larger-clap-general",
+  "device": "cuda:1"
+}

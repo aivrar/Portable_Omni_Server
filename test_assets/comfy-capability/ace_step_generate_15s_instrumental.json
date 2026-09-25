@@ -1,0 +1,13 @@
+{
+  "prompt": "minimal psychedelic techno, deep analog bass, sparse kick, crisp hi-hats, evolving modular arpeggio, wide stereo field, no vocals, instrumental",
+  "lyrics": "",
+  "duration_s": 15,
+  "steps": 8,
+  "cfg": 1.0,
+  "scheduler": "euler",
+  "seed": 20260811,
+  "sample_rate": 48000,
+  "channels": 2,
+  "autospawn": false,
+  "device": "cuda:1"
+}

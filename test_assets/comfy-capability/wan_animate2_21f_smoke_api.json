@@ -1,0 +1,217 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "wan_animate_2_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": {
+      "model": ["1", 0],
+      "lora_name": "lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors",
+      "strength_model": 1.0
+    }
+  },
+  "3": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "wan",
+      "device": "default"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["3", 0],
+      "text": "Character appearance description: A full-body futuristic dancer with a dark teal utility jacket, fitted black trousers, and articulated brass mechanical forearms and hands. Background description: A clean warm-gray studio, soft even lighting, stable camera, no decorations."
+    }
+  },
+  "5": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["3", 0],
+      "text": "overexposed, static, blurred detail, subtitles, text, painting, worst quality, low quality, compression artifacts, malformed hands, fused fingers, extra limbs, distorted face, cluttered background, camera shake"
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["3", 0],
+      "text": "A person performs a gentle full-body gesture with controlled arm movement and a small change of stance; the camera remains stationary."
+    }
+  },
+  "7": {
+    "class_type": "CLIPVisionLoader",
+    "inputs": {
+      "clip_name": "clip_vision_h.safetensors"
+    }
+  },
+  "8": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "Wan2_1_VAE_bf16.safetensors"
+    }
+  },
+  "9": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "omni-capability-tests/fullbody-neutral.png"
+    }
+  },
+  "10": {
+    "class_type": "LoadVideo",
+    "inputs": {
+      "file": "omni-capability-tests/Omni_H3_probe_r768x448_f73_s30_crf15_00001_.mp4"
+    }
+  },
+  "11": {
+    "class_type": "GetVideoComponents",
+    "inputs": {
+      "video": ["10", 0]
+    }
+  },
+  "12": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": ["9", 0],
+      "upscale_method": "area",
+      "width": 480,
+      "height": 832,
+      "crop": "center"
+    }
+  },
+  "13": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": ["11", 0],
+      "upscale_method": "area",
+      "width": 480,
+      "height": 832,
+      "crop": "center"
+    }
+  },
+  "14": {
+    "class_type": "CLIPVisionEncode",
+    "inputs": {
+      "clip_vision": ["7", 0],
+      "image": ["12", 0],
+      "crop": "none"
+    }
+  },
+  "15": {
+    "class_type": "ImageFromBatch",
+    "inputs": {
+      "image": ["13", 0],
+      "batch_index": 0,
+      "length": 1
+    }
+  },
+  "16": {
+    "class_type": "CLIPVisionEncode",
+    "inputs": {
+      "clip_vision": ["7", 0],
+      "image": ["15", 0],
+      "crop": "none"
+    }
+  },
+  "17": {
+    "class_type": "WanAnimate2ToVideo",
+    "inputs": {
+      "positive": ["4", 0],
+      "negative": ["5", 0],
+      "vae": ["8", 0],
+      "width": 480,
+      "height": 832,
+      "length": 21,
+      "batch_size": 1,
+      "video_frame_offset": 0,
+      "pose_strength": 1.0,
+      "pose_start_percent": 0.0,
+      "pose_end_percent": 1.0,
+      "reference_image_strength": 1.0,
+      "reference_image": ["12", 0],
+      "pose_video": ["13", 0],
+      "clip_vision_output": ["14", 0],
+      "positive_pose": ["6", 0],
+      "clip_vision_output_pose": ["16", 0]
+    }
+  },
+  "18": {
+    "class_type": "WanAnimate2Cache",
+    "inputs": {
+      "model": ["2", 0],
+      "device": "cpu",
+      "dtype": "int8"
+    }
+  },
+  "19": {
+    "class_type": "ModelSamplingSD3",
+    "inputs": {
+      "model": ["18", 0],
+      "shift": 5.0
+    }
+  },
+  "20": {
+    "class_type": "BasicScheduler",
+    "inputs": {
+      "model": ["18", 0],
+      "scheduler": "simple",
+      "steps": 6,
+      "denoise": 1.0
+    }
+  },
+  "21": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "lcm"
+    }
+  },
+  "22": {
+    "class_type": "SamplerCustom",
+    "inputs": {
+      "model": ["19", 0],
+      "add_noise": true,
+      "noise_seed": 20260820,
+      "cfg": 1.0,
+      "positive": ["17", 0],
+      "negative": ["17", 1],
+      "sampler": ["21", 0],
+      "sigmas": ["20", 0],
+      "latent_image": ["17", 2]
+    }
+  },
+  "23": {
+    "class_type": "TrimVideoLatent",
+    "inputs": {
+      "samples": ["22", 0],
+      "trim_amount": ["17", 3]
+    }
+  },
+  "24": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["23", 0],
+      "vae": ["8", 0]
+    }
+  },
+  "25": {
+    "class_type": "CreateVideo",
+    "inputs": {
+      "images": ["24", 0],
+      "fps": 24.0,
+      "bit_depth": 8
+    }
+  },
+  "26": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": ["25", 0],
+      "filename_prefix": "capability_tests/WanAnimate2_21f_CPUCache_480x832",
+      "format": "mp4",
+      "codec": "auto"
+    }
+  }
+}

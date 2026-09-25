@@ -1,0 +1,12 @@
+{
+  "prompt": "minimal hypnotic techno instrumental, 126 BPM, dry kick, restrained sub bass, sparse metallic clicks, clean club mix, no vocals",
+  "negative_prompt": "speech, singing, clipping, muddy bass",
+  "duration_s": 8,
+  "steps": 8,
+  "cfg_scale": 1.0,
+  "scheduler": "euler",
+  "seed": 2026081130,
+  "bf16": true,
+  "overlapped_decode": true,
+  "autospawn": false
+}

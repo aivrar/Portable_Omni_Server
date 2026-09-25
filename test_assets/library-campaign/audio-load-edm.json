@@ -1,0 +1,4 @@
+{
+  "sa_variant": "audialab-edm",
+  "device": "cuda:0"
+}

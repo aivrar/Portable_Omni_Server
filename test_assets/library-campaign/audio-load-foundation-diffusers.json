@@ -1,0 +1,4 @@
+{
+  "sa_variant": "foundation-1-diffusers",
+  "device": "cuda:0"
+}

@@ -1,0 +1,10 @@
+{
+  "prompt": "intimate fingerstyle acoustic guitar instrumental, warm wood resonance, natural room, expressive but restrained, no vocals",
+  "negative_prompt": "speech, singing, drums, clipping, electric guitar",
+  "duration_s": 10,
+  "steps": 8,
+  "cfg_scale": 1.0,
+  "scheduler": "euler",
+  "seed": 2026081154,
+  "autospawn": false
+}

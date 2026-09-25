@@ -1,0 +1,9 @@
+{
+  "action": "uninstall",
+  "instance_id": "comfy-cuda1-8188",
+  "node": "ComfyUI_LatentSync@nightly",
+  "dry_run": false,
+  "auto_restart": true,
+  "timeout_s": 300,
+  "expected_nodes": []
+}

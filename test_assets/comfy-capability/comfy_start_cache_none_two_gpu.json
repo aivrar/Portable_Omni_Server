@@ -1,0 +1,21 @@
+{
+  "device": "cuda:1",
+  "gpu_pool": [
+    "cuda:1",
+    "cuda:0"
+  ],
+  "vram_mode": "normal",
+  "precision": null,
+  "preview_method": "auto",
+  "disable_pinned_memory": false,
+  "startup_options": {
+    "cache_policy": "none",
+    "reserve_vram": 1.0,
+    "async_offload": "auto",
+    "dynamic_vram": "auto",
+    "mmap_mode": "torch",
+    "disable_smart_memory": false,
+    "attention": "auto",
+    "verbose": "INFO"
+  }
+}

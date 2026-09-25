@@ -1,0 +1,5 @@
+{
+  "name": "acoustic-guitar",
+  "adapter_file": "adapter_model.safetensors",
+  "multiplier": 0.5
+}

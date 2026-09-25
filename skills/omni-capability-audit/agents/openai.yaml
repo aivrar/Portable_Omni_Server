@@ -1,0 +1,4 @@
+interface:
+  display_name: "Omni Capability Audit"
+  short_description: "Audit every Omni capability safely by API"
+  default_prompt: "Use $omni-capability-audit to inventory, test, verify, and clean up Omni Studio capabilities through its APIs."

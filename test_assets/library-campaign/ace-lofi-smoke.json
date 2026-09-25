@@ -1,0 +1,10 @@
+{
+  "prompt": "warm lofi instrumental, dusty drums, mellow electric piano, soft vinyl texture, relaxed late-night mood, no vocals",
+  "negative_prompt": "speech, singing, clipping, harsh treble",
+  "duration_s": 10,
+  "steps": 8,
+  "cfg_scale": 1.0,
+  "scheduler": "euler",
+  "seed": 2026081152,
+  "autospawn": false
+}

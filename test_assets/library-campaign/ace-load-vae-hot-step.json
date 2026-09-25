@@ -1,0 +1,4 @@
+{
+  "vae_variant": "hot-step-cpp",
+  "device": "cuda:1"
+}

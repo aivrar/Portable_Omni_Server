@@ -1,0 +1,11 @@
+{
+  "mode": "auto",
+  "eligible_devices": [
+    "GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a",
+    "GPU-80c24f57-c604-b55c-5433-5d248304eec9"
+  ],
+  "primary_device": "GPU-36feccef-50ef-2eaf-5c0c-5448e28a4d8a",
+  "reserve_mb": 1024,
+  "require_all": false,
+  "allow_cpu": false
+}

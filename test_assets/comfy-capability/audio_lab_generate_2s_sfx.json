@@ -1,0 +1,9 @@
+{
+  "prompt": "short cinematic sci-fi interface confirmation beep with a soft metallic tail, clean sound effect, no music, no speech",
+  "negative_prompt": "speech, singing, vocals, clipping, distortion",
+  "duration_s": 2,
+  "steps": 20,
+  "cfg_scale": 6.0,
+  "seed": 20260811,
+  "autospawn": false
+}

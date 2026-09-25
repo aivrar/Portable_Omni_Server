@@ -1,0 +1,44 @@
+# Broad compatibility constraints for Omni Studio setup.
+# This is not a full lock file; it prevents accidental major-version drift.
+torch>=2.6,<2.8
+torchvision>=0.21,<0.23
+torchaudio>=2.6,<2.8
+transformers>=4.45,<5.0
+accelerate>=0.26,<2.0
+peft>=0.10,<1.0
+scipy>=1.12,<2.0
+numpy>=2.0,<3.0
+librosa>=0.10,<1.0
+soundfile>=0.12,<1.0
+huggingface_hub>=0.23,<1.0
+fastapi>=0.110,<1.0
+uvicorn>=0.29,<1.0
+pydantic>=2.0,<3.0
+bitsandbytes>=0.43,<1.0
+optimum>=1.17,<2.0
+Pillow>=9.0,<13.0
+
+# Audio Lab (Stable Audio + CLAP). Pin tight to keep pip resolver stable.
+diffusers>=0.27,<0.40
+stable-audio-tools>=0.0.16,<0.1
+einops>=0.7,<1.0
+einops-exts>=0.0.4,<1.0
+x-transformers>=1.30,<3.0
+descript-audio-codec>=1.0,<2.0
+encodec>=0.1.1,<1.0
+alias-free-torch>=0.0.6,<1.0
+auraloss>=0.4,<1.0
+aeiou>=0.0.20,<1.0
+ema-pytorch==0.2.3
+k-diffusion>=0.1.1,<1.0
+laion-clap==1.1.4
+local-attention==1.8.6
+prefigure>=0.0.9,<1.0
+pytorch-lightning>=2.1,<3.0
+v-diffusion-pytorch==0.0.2
+
+# ACE-Step 1.5 (DiT song generation). The acestep package itself is installed
+# via --no-deps from git (see setup.sh) to dodge its hard-pinned requirements;
+# only the loose runtime helper it imports is constrained here. peft is
+# already covered above.
+omegaconf>=2.3,<3.0

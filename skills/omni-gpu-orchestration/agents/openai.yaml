@@ -1,0 +1,4 @@
+interface:
+  display_name: "Omni GPU Orchestration"
+  short_description: "Plan GPU placement, sharding, and cleanup safely"
+  default_prompt: "Use $omni-gpu-orchestration to detect available resources and choose a safe maximum-utilization placement plan."

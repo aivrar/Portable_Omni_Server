@@ -1,0 +1,11 @@
+{
+  "prompt": "modern Chinese rap over a sparse electronic beat, deep bass, crisp drums, confident male vocal",
+  "lyrics": "[Verse]\n夜色点亮城市的光\n一步一步走向远方",
+  "negative_prompt": "clipping, muddy mix, English vocal",
+  "duration_s": 10,
+  "steps": 8,
+  "cfg_scale": 1.0,
+  "scheduler": "euler",
+  "seed": 2026081150,
+  "autospawn": false
+}

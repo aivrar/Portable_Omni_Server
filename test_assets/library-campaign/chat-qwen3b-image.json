@@ -1,0 +1,7 @@
+{
+  "model": "qwen_omni_3b",
+  "text": "Describe the person, pose, clothing, and background in this image in two concise sentences.",
+  "max_new_tokens": 96,
+  "temperature": 0.2,
+  "top_p": 0.9
+}

@@ -1,0 +1,11 @@
+{
+  "model": "qwen_omni_3b",
+  "variant": "base",
+  "device": "cuda:1",
+  "placement": {
+    "mode": "single",
+    "eligible_devices": ["cuda:1"],
+    "primary_device": "cuda:1",
+    "reserve_mb": 1024
+  }
+}

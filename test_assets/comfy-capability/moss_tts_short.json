@@ -1,0 +1,7 @@
+{
+  "text": "This is a short local speech sample for the Omni Studio lip sync test. The voice should be clear, natural, and easy to align with a talking portrait.",
+  "response_format": "wav",
+  "speed": 1.0,
+  "autospawn": false,
+  "device": "cuda:1"
+}

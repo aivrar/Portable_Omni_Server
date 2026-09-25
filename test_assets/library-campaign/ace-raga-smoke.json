@@ -1,0 +1,10 @@
+{
+  "prompt": "Indian raga-inspired instrumental, expressive sitar, tanpura drone, tabla cycle, gradual melodic development, no vocals",
+  "negative_prompt": "speech, singing, clipping, distorted percussion",
+  "duration_s": 10,
+  "steps": 8,
+  "cfg_scale": 1.0,
+  "scheduler": "euler",
+  "seed": 2026081153,
+  "autospawn": false
+}

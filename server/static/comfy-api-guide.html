@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Omni Studio ComfyUI Guide</title>
+  <style>
+    :root { color-scheme: dark; --bg:#101318; --panel:#181d25; --line:#303846; --text:#eef2f7; --muted:#aeb8c6; --blue:#75a7ff; --green:#72d39a; --orange:#f6b85f; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { width:min(940px,calc(100% - 32px)); margin:32px auto 64px; }
+    header,section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px; margin-bottom:16px; }
+    h1,h2,h3 { line-height:1.2; margin-top:0; } h1 { margin-bottom:8px; } h2 { margin-bottom:12px; }
+    p,li { color:var(--muted); } strong { color:var(--text); } a { color:var(--blue); }
+    code { color:#d6e4ff; background:#0c1016; border:1px solid var(--line); border-radius:5px; padding:2px 5px; }
+    pre { overflow:auto; background:#0c1016; border:1px solid var(--line); border-radius:8px; padding:12px; color:#d6e4ff; }
+    .steps { counter-reset:step; list-style:none; padding:0; }
+    .steps li { counter-increment:step; position:relative; padding:0 0 14px 42px; }
+    .steps li::before { content:counter(step); position:absolute; left:0; top:0; width:27px; height:27px; display:grid; place-items:center; border-radius:50%; background:#274b83; color:white; font-weight:700; }
+    .note { border-left:4px solid var(--blue); padding-left:12px; }
+    .warning { border-left-color:var(--orange); }
+    .good { color:var(--green); }
+    table { width:100%; border-collapse:collapse; } th,td { text-align:left; border-top:1px solid var(--line); padding:9px; color:var(--muted); vertical-align:top; } th { color:var(--text); }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Using ComfyUI in Omni Studio</h1>
+    <p>Start Comfy, prepare workflows, place model components across your GPUs, and verify results safely. Planning and dependency checks do not load model weights.</p>
+  </header>
+
+  <section>
+    <h2>Recommended first run</h2>
+    <ol class="steps">
+      <li><strong>Open the ComfyUI tab.</strong> Select the GPU that should be primary.</li>
+      <li><strong>Enable component placement</strong> and check every auxiliary GPU you want Comfy to see.</li>
+      <li><strong>Start ComfyUI.</strong> Starting the engine does not load a model.</li>
+      <li><strong>Open Workflows</strong> and choose the running Comfy instance.</li>
+      <li><strong>Select Automatic pool</strong>, choose eligible GPUs, and leave reasonable VRAM reserve.</li>
+      <li><strong>Click Plan GPUs.</strong> Review component assignments, memory estimates, warnings, and blockers.</li>
+      <li><strong>Run only when the plan is valid.</strong> Confirm the final placement shown before queueing.</li>
+      <li><strong>Watch execution and verify output.</strong> “Queued” means accepted, not completed.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Placement modes</h2>
+    <table>
+      <thead><tr><th>Mode</th><th>Use it when</th><th>Behavior</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Single GPU</strong></td><td>The workflow fits on one card.</td><td>Every discovered component targets the selected GPU.</td></tr>
+        <tr><td><strong>Automatic pool</strong></td><td class="good">Recommended default.</td><td>The planner uses selected GPUs according to model size and current headroom.</td></tr>
+        <tr><td><strong>Manual / hybrid</strong></td><td>You know a component should use a specific card.</td><td>Your locked components stay fixed; everything else is planned automatically.</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Warm reruns can reuse VRAM already owned by the selected
+    Comfy process. Omni does this only when that process is the sole NVIDIA
+    compute PID on the GPU; otherwise planning uses current free headroom so it
+    does not crowd another application.</p>
+    <p class="note"><strong>“Use all GPUs” means all selected cards are eligible.</strong> Omni does not force work onto a GPU when doing so provides no benefit. The advanced “require every GPU” option changes that and can block a plan.</p>
+    <p class="note warning"><strong>This is component placement, not layer sharding.</strong> A diffusion model, text encoder, or VAE can use a different GPU. One individual model is not split layer-by-layer across cards.</p>
+  </section>
+
+  <section>
+    <h2>Memory behavior</h2>
+    <p>Omni’s staged MiniMax H3 workflow has strict phase boundaries: text encoder, diffusion model, video VAE, and audio VAE load and unload sequentially. Ordinary Comfy loaders can be routed to different GPUs but may remain resident together. The plan warns when a graph lacks strict staged unloading.</p>
+    <p>Keep VRAM reserve for Windows, the display, Comfy itself, and changing free-memory conditions. A valid estimate is a safety decision based on current information, not a promise that other applications will leave memory free.</p>
+  </section>
+
+  <section>
+    <h2>Models and custom nodes</h2>
+    <ul>
+      <li>Workflow checks identify missing model files and node classes without loading models.</li>
+      <li>Comfy models live inside the distro under <code>/opt/omni_studio/comfyui/models/&lt;category&gt;</code>.</li>
+      <li>Verified Hugging Face downloads use Hub plus Xet and install into the selected Comfy category.</li>
+      <li>A queued download is not finished. Wait for the job and verify the file.</li>
+      <li>Deleting a model is immediate and not recoverable. Confirm its exact category and filename.</li>
+      <li>A custom-node repository is not considered working until its expected node classes load after restart.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Updates</h2>
+    <p><strong>Update Comfy core</strong> and <strong>Manager update-all</strong> are separate operations. A complete update performs them sequentially, restarts as required, and verifies both the core commit and loaded custom nodes. Do not run both updates concurrently.</p>
+    <p>A dry run is optional when you only want a preview. It is not required before an update you have explicitly approved.</p>
+  </section>
+
+  <section>
+    <h2>When a plan is blocked</h2>
+    <ul>
+      <li><strong>Restart required:</strong> the running Comfy instance was not started with a requested GPU in its pool.</li>
+      <li><strong>Insufficient headroom:</strong> free VRAM minus reserve is below the estimated peak.</li>
+      <li><strong>Missing model or node:</strong> install and verify the dependency, then check the workflow again.</li>
+      <li><strong>API export needed:</strong> export the workflow in Comfy API format before queueing.</li>
+    </ul>
+    <p>Do not bypass a blocker. Change the pool, workflow, model precision, workload size, or explicit placement and then generate a new plan.</p>
+  </section>
+
+  <section>
+    <h2>For API users and agents</h2>
+    <p>The detailed specification is stored with the app at <code>docs/comfy-api.md</code>. The app-owned agent skill is <code>skills/omni-comfy-api/SKILL.md</code>, and root <code>AGENTS.md</code> directs new agents to it automatically.</p>
+    <p>API schemas are typed in the gateway source. Interactive <code>/docs</code> and <code>/openapi.json</code> are intentionally disabled by default and are available only when a local development gateway starts with <code>OMNI_ENABLE_DOCS=1</code>.</p>
+  </section>
+</main>
+</body>
+</html>

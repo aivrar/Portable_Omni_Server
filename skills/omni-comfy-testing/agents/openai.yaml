@@ -1,0 +1,5 @@
+interface:
+  display_name: "Omni Comfy Testing"
+  short_description: "Plan and run safe local Comfy capability tests"
+  brand_color: "#4F46E5"
+  default_prompt: "Use $omni-comfy-testing to prepare, analyze, run, and verify a local Comfy capability test through Omni APIs."

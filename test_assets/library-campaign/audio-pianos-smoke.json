@@ -1,0 +1,10 @@
+{
+  "prompt": "intimate solo felt piano motif, gentle evolving harmony, natural room resonance, no other instruments, no vocals",
+  "negative_prompt": "speech, singing, drums, clipping, synthesizer",
+  "duration_s": 10,
+  "steps": 50,
+  "cfg_scale": 7.0,
+  "sampler": "dpmpp-3m-sde",
+  "seed": 2026081205,
+  "autospawn": false
+}

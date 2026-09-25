@@ -1,0 +1,11 @@
+{
+  "prompt": "short cinematic sci-fi interface confirmation beep with a soft metallic tail, no speech, no music",
+  "seconds": 2,
+  "steps": 20,
+  "cfg_scale": 4.0,
+  "sigma_shift": 5.0,
+  "seed": 20260811,
+  "negative_prompt": "speech, singing, vocals, clipping, distortion",
+  "autospawn": false,
+  "device": "cuda:1"
+}

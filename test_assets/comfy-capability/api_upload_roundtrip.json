@@ -1,0 +1,15 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "capability_tests/wan_animate2_21f_first.png"
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": ["1", 0],
+      "filename_prefix": "capability_tests/API_Upload_Roundtrip"
+    }
+  }
+}

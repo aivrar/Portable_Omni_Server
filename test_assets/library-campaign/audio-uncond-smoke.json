@@ -1,0 +1,7 @@
+{
+  "duration_s": 4,
+  "steps": 20,
+  "sampler": "dpmpp-3m-sde",
+  "seed": 2026081208,
+  "autospawn": false
+}

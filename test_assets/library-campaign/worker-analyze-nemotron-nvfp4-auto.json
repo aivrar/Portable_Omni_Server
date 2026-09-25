@@ -1,0 +1,12 @@
+{
+  "model": "nemotron_nano_omni",
+  "variant": "nvfp4",
+  "placement": {
+    "mode": "auto",
+    "eligible_devices": ["cuda:0", "cuda:1"],
+    "primary_device": "cuda:1",
+    "reserve_mb": 1024,
+    "require_all": false,
+    "allow_cpu": false
+  }
+}

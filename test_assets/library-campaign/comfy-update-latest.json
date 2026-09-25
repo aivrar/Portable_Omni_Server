@@ -1,0 +1,5 @@
+{
+  "ref": "latest",
+  "dry_run": false,
+  "restart_instances": false
+}

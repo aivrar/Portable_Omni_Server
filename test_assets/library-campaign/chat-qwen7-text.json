@@ -1,0 +1,7 @@
+{
+  "model": "qwen_omni_7b",
+  "text": "Reply with exactly: Omni API quantized text path works",
+  "max_new_tokens": 32,
+  "temperature": 0.0,
+  "top_p": 1.0
+}

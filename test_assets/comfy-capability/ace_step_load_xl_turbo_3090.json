@@ -1,0 +1,9 @@
+{
+  "model_variant": "ace-xl-turbo",
+  "lm_variant": "ace-lm-1.7b",
+  "bf16": true,
+  "cpu_offload": false,
+  "int8": false,
+  "torch_compile": false,
+  "device": "cuda:1"
+}

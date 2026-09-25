@@ -1,0 +1,25 @@
+{
+  "1": {
+    "_meta": {"title": "LTX-2.3 22B distilled checkpoint requirement"},
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "ltx-2.3-22b-distilled-fp8.safetensors"
+    }
+  },
+  "2": {
+    "_meta": {"title": "LTX-2.3 Gemma audiovisual text encoder requirement"},
+    "class_type": "LTXAVTextEncoderLoader",
+    "inputs": {
+      "text_encoder": "gemma_3_12B_it_fp4_mixed.safetensors",
+      "ckpt_name": "ltx-2.3-22b-distilled-fp8.safetensors",
+      "device": "default"
+    }
+  },
+  "3": {
+    "_meta": {"title": "LTX-2.3 audio VAE checkpoint requirement"},
+    "class_type": "LTXVAudioVAELoader",
+    "inputs": {
+      "ckpt_name": "ltx-2.3-22b-distilled-fp8.safetensors"
+    }
+  }
+}

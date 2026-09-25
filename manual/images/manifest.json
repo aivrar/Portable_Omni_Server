@@ -1,0 +1,189 @@
+{
+  "captured": "2026-09-25",
+  "tool": "Python Playwright 1.58.0 / Chromium 145.0.7632.6",
+  "surface": "Live Omni Studio bridge on Windows; app content only",
+  "ui_source_sha256": {
+    "app.js": "79bc5fd728e23d1c5c7780d2f91507c9efc03e788be6c7be2ceebf41a9b7825a",
+    "comfy-api-guide.html": "73227fd714bfcccfc35e51d575a48eb6b1e2c7fa7c49333e5519683a34ebb03f",
+    "index.html": "d1263f5dd49e66b11b8d613eaa3a81f8171c63168f54ef779a145a33161e99bf",
+    "style.css": "93d00a966a80afa942ef528c6b8264481579595c747edf11d1acacbb60ba1d13",
+    "tab-ace-step.js": "fb1fbffb700d5318ec8103417d1e8e5a0cffe12928a67bd7d3959cb484fae0ec",
+    "tab-audio-lab.js": "e22a64240fd8041679974e3a6711c8d8cc6770980ffb81439856ed664a090de8",
+    "tab-chat.js": "41c3107bb2da3ae21521f8e1795a2e0de84b34127ad85d054203fd27a497d3d9",
+    "tab-comfy.js": "78344f5792d147889a62a67e804844b28ad2533225b80360bf82c952078c7fb6",
+    "tab-log.js": "e5343300477e3690678a0df87a24a5f996dc8e15728ce3cc9ffb9e1ae2df37cf",
+    "tab-media.js": "0b949d5f576fee9eab31997bc7f63bba6161bcec5a05c6f76f1ca9cb0ff8d6a4",
+    "tab-minimax-music3.js": "a0bb3de2730c23bed0d19bc7f0d89ffa38fce4cab57e5b843d70e578b5206fa4",
+    "tab-models.js": "0e81dd283a56fa34d81c34b405ffe2bb94bf716d690dd2c72b2845d54d191c9e",
+    "tab-moss.js": "300fd5b9859620af6bb776acd9b606e467f7f24b5d2e6ff5970d7a7853ed9331",
+    "tab-server.js": "f79d60024f6c70595f7a51f5a249bc03bd8f3b9db55ce7bf2423114d739ba150",
+    "tab-setup.js": "9e29d6ec1436771c9444d16ad7c51c072328b48311d73cb63561bb21874d4159",
+    "tab-testing.js": "fe05011d9ed3f2d3952e97215960633bd1771ab646577504c5852d99625c5243",
+    "tab-tts.js": "1c8e77c46dcbf67aa281dc46690b8e61b153f563452f743e2f94c89c46b03aa8",
+    "tab-workflows.js": "34291fa8182e6a10d871614604ca745d27c04824c0fd45320b4a36a3514af044"
+  },
+  "images": [
+    {
+      "file": "hero.png",
+      "title": "Home overview",
+      "width": 3200,
+      "height": 1800,
+      "bytes": 437222,
+      "sha256": "92c357a002df806e8bb9a5975b580eff01a2ac4b1f2378ed7c13de022921cb37",
+      "caption": "Connected, idle workspace with no installed standalone model families."
+    },
+    {
+      "file": "home.png",
+      "title": "Home",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 136084,
+      "sha256": "66fda31528762d97b17abab19ad3bc3a9537235c29ad873a96b0f1d549cfd927",
+      "caption": "Home recommends installing a model; the gateway is connected and idle."
+    },
+    {
+      "file": "chat.png",
+      "title": "Chat",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 102920,
+      "sha256": "a446d142b1bf815144521dce557332236dc99d5be6c813953a250f1a174241b3",
+      "caption": "A new empty Qwen session. No worker is running; unsupported audio/video attachments are disabled."
+    },
+    {
+      "file": "media-library.png",
+      "title": "Media library",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 61260,
+      "sha256": "36c747a0d075788e3709eb1c9b18efb8d98c4eaa6974aa0d71789a2132a421f8",
+      "caption": "The filename prefix filter has no matches. Clear filters returns to the library; existing personal media is outside this capture."
+    },
+    {
+      "file": "model-library.png",
+      "title": "Model library",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 96353,
+      "sha256": "be8c468152ceac36de9f33c4826083afb12a49dacaeb9400712b83247b61152d",
+      "caption": "Expand a model family to inspect variants, size and installation status before downloading."
+    },
+    {
+      "file": "runtime.png",
+      "title": "Runtime",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 114031,
+      "sha256": "ff74156d641ee63a71e169f282c8b2df6a17dc1efe9c2ba5fa9648b96a20fecc",
+      "caption": "Device memory, idle worker state and the Windows-facing API address. Memory use includes activity outside Omni."
+    },
+    {
+      "file": "workflows.png",
+      "title": "Workflows",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 133826,
+      "sha256": "42e0c955fa1b74ecde8357c7b3ace7c5392141b8db34c5d2a997c00fe7e03848",
+      "caption": "Saved workflow requirements after checking. Missing models and stopped Comfy keep Run disabled."
+    },
+    {
+      "file": "engine-queue.png",
+      "title": "Engine & queue",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 99234,
+      "sha256": "667e8250d39b07c020d89f97ef716c8f60a4bfdb818e4a7b1fcf4eb729a39e0c",
+      "caption": "Local Comfy installation is ready, but no instance is running. No remote update check was performed."
+    },
+    {
+      "file": "voice-tts.png",
+      "title": "Voice & TTS",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 176663,
+      "sha256": "223a804b0b6c64cd8bdb56c402b3992c2716525252753c3ba1cbac872302057d",
+      "caption": "The speech workspace is marked Soon. Its roadmap is not evidence of working speech generation."
+    },
+    {
+      "file": "audio-lab.png",
+      "title": "Audio Lab",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 75900,
+      "sha256": "440e79d589fecbf7a85216e77ba23bb98c809d9d93c4754847581cf77c57f92a",
+      "caption": "Generate controls with no Audio Lab worker. Load a compatible engine before submitting audio work."
+    },
+    {
+      "file": "music.png",
+      "title": "Music",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 87140,
+      "sha256": "c4a046aa9fb5aa5d8c84a73f83dd81f8c997b0c1f539449521f2355365a665ac",
+      "caption": "ACE-Step task controls in their unloaded state. Visible transformations have separate model requirements."
+    },
+    {
+      "file": "music-3.png",
+      "title": "Music 3",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 109446,
+      "sha256": "c204c3b78e6e266e0e3510e7b03cf756a2e4c8d4f5b262fb26bec728c22c536c",
+      "caption": "An unsent instrumental example with a 30-second duration and the RTX 3090 selected. The model is not installed; Generate is disabled."
+    },
+    {
+      "file": "moss.png",
+      "title": "MOSS",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 80231,
+      "sha256": "a2dbb53ea7f27512d29b1f7fbc232cfa598cdfd3d0ce335ec89d83aaf12653a5",
+      "caption": "Separate speech and sound-effect controls with no installed workers. The manual documents the speech decoder limitation."
+    },
+    {
+      "file": "testing.png",
+      "title": "Testing",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 101819,
+      "sha256": "2506b07dea625f7e0911fa344632a8eed03d4972caa57ee6bb7b939d2511d6d9",
+      "caption": "Developer controls for selecting installed variants and workers. Loading and inference were not performed for this capture."
+    },
+    {
+      "file": "logs.png",
+      "title": "Logs",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 312440,
+      "sha256": "8d3092d03bc693c6fe685bbb26b7b9aad0ae6015bd0a67c01e62fbd46d1f0f48",
+      "caption": "The actual log viewer with retained local log entries. Historical entries do not describe a currently running Comfy instance."
+    },
+    {
+      "file": "workflow-editor.png",
+      "title": "Workflow JSON editor",
+      "width": 1128,
+      "height": 467,
+      "bytes": 36201,
+      "sha256": "42c2d296db30db633c5c156b66aa522cd9072802877c59fbdbc06884217644da",
+      "caption": "An unsaved, model-free EmptyImage/PreviewImage draft. The draft was not queued or saved to the workflow library."
+    },
+    {
+      "file": "home-narrow.png",
+      "title": "Narrow window",
+      "width": 390,
+      "height": 844,
+      "bytes": 63288,
+      "sha256": "67b4ba8be075428bf647f3cdd7a7dbabe4d5c999bd1eaa7b44b546bb57967c12",
+      "caption": "Home at a 390-pixel viewport. The hamburger opens navigation; Escape or the scrim closes it."
+    },
+    {
+      "file": "shutdown-control.png",
+      "title": "Shutdown control",
+      "width": 232,
+      "height": 31,
+      "bytes": 3190,
+      "sha256": "5d5cd3a7954d2dd6e230dd135c5c3771e6b8139aa0c1ca9a48e5e8abb1029252",
+      "caption": "The top-bar Shutdown button. Cancelling its confirmation was tested without stopping the gateway."
+    }
+  ]
+}

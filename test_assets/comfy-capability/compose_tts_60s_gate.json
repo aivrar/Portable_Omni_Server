@@ -1,0 +1,15 @@
+{
+  "segments": [
+    {"path": "tts/moss_tts/2026-08-10T12-50-14.wav", "kind": "omni", "start_s": 0.0, "end_s": 12.0, "label": "sentence-1"},
+    {"path": "tts/moss_tts/2026-08-10T12-50-14.wav", "kind": "omni", "start_s": 0.0, "end_s": 12.0, "label": "sentence-2"},
+    {"path": "tts/moss_tts/2026-08-10T12-50-14.wav", "kind": "omni", "start_s": 0.0, "end_s": 12.0, "label": "sentence-3"},
+    {"path": "tts/moss_tts/2026-08-10T12-50-14.wav", "kind": "omni", "start_s": 0.0, "end_s": 12.0, "label": "sentence-4"},
+    {"path": "tts/moss_tts/2026-08-10T12-50-14.wav", "kind": "omni", "start_s": 0.0, "end_s": 12.04, "label": "sentence-5"}
+  ],
+  "crossfade_s": 0.01,
+  "sample_rate": 48000,
+  "bit_depth": 16,
+  "loudness_normalize": false,
+  "cpu_threads": 2,
+  "title": "tts-composed-60s-gate"
+}

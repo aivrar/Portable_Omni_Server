@@ -1,0 +1,61 @@
+{
+  "1": {
+    "_meta": {"title": "Krea 2 Turbo model"},
+    "class_type": "UNETLoader",
+    "inputs": {"unet_name": "krea2_turbo_int8_convrot.safetensors", "weight_dtype": "default"}
+  },
+  "2": {
+    "_meta": {"title": "Krea 2 text encoder"},
+    "class_type": "CLIPLoader",
+    "inputs": {"clip_name": "qwen3vl_4b_fp8_scaled.safetensors", "device": "default", "type": "krea2"}
+  },
+  "3": {
+    "_meta": {"title": "Positive prompt"},
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["2", 0],
+      "text": "A cinematic documentary photograph of a weathered roadside workshop at blue hour, a woman with curly dark hair in a teal jacket holding a brass lantern beside a rain-speckled window, warm tungsten light inside and cool indigo street light outside, realistic skin and fabric texture, subtle film grain, layered foreground and background, sharply focused eyes, natural hands"
+    }
+  },
+  "4": {
+    "_meta": {"title": "Zero negative conditioning"},
+    "class_type": "ConditioningZeroOut",
+    "inputs": {"conditioning": ["3", 0]}
+  },
+  "5": {
+    "_meta": {"title": "Output dimensions"},
+    "class_type": "EmptyLatentImage",
+    "inputs": {"batch_size": 1, "height": 1024, "width": 1024}
+  },
+  "6": {
+    "_meta": {"title": "Krea 2 Turbo sampler"},
+    "class_type": "KSampler",
+    "inputs": {
+      "cfg": 1.0,
+      "denoise": 1.0,
+      "latent_image": ["5", 0],
+      "model": ["1", 0],
+      "negative": ["4", 0],
+      "positive": ["3", 0],
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "seed": 20260811,
+      "steps": 8
+    }
+  },
+  "7": {
+    "_meta": {"title": "Qwen Image VAE"},
+    "class_type": "VAELoader",
+    "inputs": {"vae_name": "qwen_image_vae.safetensors"}
+  },
+  "8": {
+    "_meta": {"title": "Decode output"},
+    "class_type": "VAEDecode",
+    "inputs": {"samples": ["6", 0], "vae": ["7", 0]}
+  },
+  "9": {
+    "_meta": {"title": "Routed output"},
+    "class_type": "SaveImage",
+    "inputs": {"filename_prefix": "capability_tests/Krea2_Turbo_API", "images": ["8", 0]}
+  }
+}

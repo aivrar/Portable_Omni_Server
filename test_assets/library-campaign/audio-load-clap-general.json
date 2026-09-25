@@ -1,0 +1,4 @@
+{
+  "clap_variant": "larger-clap-general",
+  "device": "cuda:0"
+}

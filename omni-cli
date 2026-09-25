@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# POSIX shim for the Omni Studio CLI.
+# Resolves the install root, then exec's into the bundled Python entry point.
+set -e
+APP_DIR="${OMNI_APP_DIR:-/opt/omni_studio}"
+VENV_PY="$APP_DIR/venv/bin/python3"
+if [ ! -x "$VENV_PY" ]; then
+    VENV_PY="$(command -v python3)"
+fi
+export PYTHONPATH="$APP_DIR${PYTHONPATH:+:$PYTHONPATH}"
+exec "$VENV_PY" -m cli.omni "$@"
