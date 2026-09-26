@@ -2503,6 +2503,12 @@ disk is not a release input.
   `--no-deps` install. Both are now installed by one shared AnyGPT override
   helper used by full and dependency-only installs. The repaired codec, trainer
   and optimizer import together successfully in the clean Linux environment.
+- **P-08 — Watchdog cleanup assumed the default gateway port:** the shutdown
+  helper used port 8200 when invoked without `--api-url`, even when the bridge
+  inherited another `API_PORT`. It now respects `API_PORT`, then
+  `OMNI_API_PORT`, then the normal default. The targeted regression covers
+  precedence and fallback. This was found while qualifying a separate test
+  registration on alternate ports; its cleanup must target that registration.
 
 The clean main setup completed with real success stamps and import checks for
 ACE-Step and Stable Audio, plus installed pinned ComfyUI and Manager. The

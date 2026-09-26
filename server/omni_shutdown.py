@@ -45,7 +45,11 @@ from process_identity import process_matches, process_start_time, owned_process_
 logger = logging.getLogger(__name__)
 
 GATEWAY_PID_FILE = RUNTIME_DIR / "gateway.pid"
-DEFAULT_API_URL = f"http://127.0.0.1:{DEFAULT_API_PORT}"
+# The watchdog inherits the bridge's API_PORT. Honor it when the helper is
+# invoked without --api-url, including isolated or relocated installations.
+DEFAULT_API_URL = "http://127.0.0.1:" + str(int(
+    os.environ.get("API_PORT") or os.environ.get("OMNI_API_PORT") or DEFAULT_API_PORT
+))
 
 
 def _read_api_token() -> str | None:

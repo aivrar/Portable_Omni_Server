@@ -76,8 +76,8 @@ the exact source boundary and checks.
   in [Windows icon packaging](windows-icon.md).
 - Runtime/private artifacts are excluded by `.gitignore`; reviewed manual
   images remain eligible for Git.
-- [Portability](portability.md) documents actual runtime containment and the
-  host Python relay dependency, missing prepared export, and fresh-PC test gap.
+- [Portability](portability.md) documents the preinstalled release contents,
+  bundled Windows helpers, host prerequisites and WSL registration/backup rules.
 - `origin` points to the public repository; local `main` tracks `origin/main`.
 
 ## Source publication record
@@ -95,18 +95,21 @@ the exact source boundary and checks.
 
 ## Packaged release work
 
-The source repo and the portable app archive have separate readiness gates.
-The current Windows relay finds a host `pythonw.exe`; a bundled implementation
-is still required for a package that does not need developer Python. WebView2,
-WSL2 and the GPU driver must have an explicit distribution/prerequisite policy.
+The maintainer selected the larger preinstalled distro with model weights
+downloaded separately. A clean build now contains the shared stack, ComfyUI,
+Manager, OmniBridge and all nine model-specific runtime slots. The Windows
+package includes embedded Python and signed Microsoft C++ runtime DLLs;
+WebView2, WSL2 and the Windows GPU driver remain host prerequisites.
 
-The folder currently has only a minimal Ubuntu bootstrap archive plus the live
-VHDX. Build a clean distributable runtime export, preserve its dependency/model
-license notices, and verify it on a fresh host with no original Omni registration
-or developer checkout. Do not package the personal working disk directly.
+The clean build was tested through an isolated launcher folder on separate
+ports. Gateway/audio state checks, offline runtime imports, CPU Comfy startup,
+714-node discovery, empty queues, browser navigation, native window icons and
+graceful shutdown passed. Exact Ubuntu source packages and dependency/license
+inventories accompany the release. The personal working disk is not a build
+input. Final image export/import and publication are recorded separately.
 
 Release notes must list included engines, whether weights are included or
 downloaded on demand, host requirements, known capability limits, and the exact
 qualification results. Publish archive checksums and launcher provenance with
-the release. Complete offline portability remains unqualified until that
-fresh-host test passes.
+the release. Distinguish a fresh WSL registration on the existing Windows host
+from testing on another physical PC, account or GPU.

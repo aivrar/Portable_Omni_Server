@@ -1,111 +1,104 @@
 # Portability and package contents
 
-Portable Omni Server is the repository name for the **Omni Studio** app.
-The app's Linux runtime is designed to travel as one WSL2 distribution. That
-does not put Windows, WSL itself, Windows GPU drivers, or the desktop browser
-runtime inside the Linux disk.
+Portable Omni Server is a **Linux distro with the Omni Studio Windows desktop
+launcher**. The release includes its Linux dependencies and Windows helper
+runtimes. Model weights are downloaded separately inside the app.
 
-## What is contained where
+## What is included
 
-| Component | Location | Current qualification |
-| --- | --- | --- |
-| Gateway and browser UI | `/opt/omni_studio/server` in the distro | Live browser connection verified September 25, 2026. |
-| Main Python environment | `/opt/omni_studio/venv` in the distro | Eleven named core packages resolve inside this environment; this is a path check, not full inference qualification. |
-| ComfyUI and custom nodes | `/opt/omni_studio/comfyui` in the distro | Checkout exists. Dependencies and models vary by installed workflow. |
-| Standalone/audio models | `/opt/omni_studio/models`, normally linked into `/var/lib/omni_studio/models` | Persisted inside the distro. The screenshot session reported zero installed standalone/audio model families. |
-| Comfy weights | `/opt/omni_studio/comfyui/models/<category>` | Managed inside the distro; installed files are workflow-specific. |
-| Workflows and output | Public `/opt/omni_studio` paths, with persistent targets under `/var/lib/omni_studio` | Inside the distro; retained user content is not a clean public release image. |
-| Windows launcher | `Omni_Studio.exe`, `webview.dll`, `app.json` beside the distro files | Local binaries exist; their build source/toolchain is outside this child repository. |
-| WSL2 | Windows host | Required, with virtualization enabled. |
-| GPU hardware and Windows driver | Windows host | Required for the GPU workloads being used. Linux CUDA userspace libraries do not replace the Windows driver. |
-| WebView2 Runtime | Windows host, or a separately packaged Windows runtime | Required for the desktop window. `webview.dll` alone is not the WebView2 Runtime. |
-| Windows loopback relay interpreter | Currently found on the host as `pythonw.exe` | A real external dependency of the relay used during browser capture. Not bundled in the current package. |
-| Model downloads, updates and gated access | Network when requested | Missing packages/weights need installation. A license or login requirement is not satisfied by carrying the app folder. |
+| Component | Location |
+| --- | --- |
+| Gateway, API, CLI and browser UI | `/opt/omni_studio/server` and the distro's app directories |
+| Shared Python, PyTorch and CUDA userspace libraries | `/opt/omni_studio/venv` |
+| ACE-Step and Stable Audio dependencies | Shared Python environment |
+| ComfyUI, Manager and OmniBridge nodes | `/opt/omni_studio/comfyui` |
+| Qwen, MiniCPM, Qwen3, Nemotron, Moshi, AnyGPT and Music 3 runtime slots | `/opt/omni_studio/overrides` |
+| Isolated MOSS-TTS and MOSS-SoundEffect environments and source | `/opt/omni_studio/overrides` |
+| Standalone and audio model storage | `/opt/omni_studio/models`, backed by `/var/lib/omni_studio/models` |
+| ComfyUI model storage | `/opt/omni_studio/comfyui/models/<category>` |
+| Workflows and generated output | Public `/opt/omni_studio` paths backed by `/var/lib/omni_studio` |
+| Windows launcher and icons | `Omni_Studio.exe`, `webview.dll`, `app.ico` |
+| Windows networking helper interpreter | `runtime/python/`; separate Windows Python installation unnecessary |
+| Microsoft C++ runtime | Signed runtime DLLs beside the Windows executable |
 
-Microsoft documents the [WSL GPU host prerequisites](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute)
-and the [WebView2 Runtime distribution requirement](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution).
-Its Fixed Version option can be packaged beside a Windows application; it is
-still a Windows component, not a dependency installed in the Linux distro.
+Installed runtime code does not mean model weights are installed or a worker
+is loaded. The initial studio has empty model and output stores. Use Model
+library to choose weights that fit your hardware and accept any upstream model
+terms. Community Comfy nodes and later updates may require additional packages.
+See [feature compatibility](../manual/21-feature-compatibility.md) for each
+engine's supported inputs and behavior.
 
-## What was checked
+## Windows host requirements
 
-On September 25, 2026, a bounded read-only check inspected the seven canonical
-runtime/storage paths, the main venv's import paths, `.pth`/`.egg-link` path
-entries, and immediate custom-node symlinks. No inspected runtime path resolved
-to a Windows mount or another mounted filesystem. There were no external
-import paths, direct editable-path entries, or immediate custom-node symlinks.
+- 64-bit Windows 11, or Windows 10 21H2 or later for WSL GPU workloads.
+- WSL2 with hardware virtualization enabled.
+- Microsoft WebView2 Runtime for the desktop window.
+- A compatible NVIDIA GPU and Windows driver for CUDA workloads.
+- Free space on the Windows drive containing the app, plus room for the
+  selected model weights and generated media.
 
-`fastapi`, `uvicorn`, `websockets`, `torch`, `transformers`, `diffusers`,
-`acestep`, `PIL`, `httpx`, `huggingface_hub` and `peft` all resolved under
-`/opt/omni_studio/venv/lib/python3.12/site-packages`. The probe located modules
-without importing model frameworks or loading weights. It did not inventory
-every shared library, isolated engine environment, plugin, or cached model.
+WSL2, Windows GPU drivers and WebView2 are host components. They are not stored
+in the Linux disk. Microsoft provides the [WSL installation guide](https://learn.microsoft.com/en-us/windows/wsl/install),
+[GPU prerequisites](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute),
+and [WebView2 Runtime guidance](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution).
 
-The main environment is therefore locally contained for the inspected scope.
-This evidence does not establish that every optional capability is installed,
-compatible, or usable offline. See [capability confidence](capability-confidence.md).
+## Download and first launch
 
-## Three different deliverables
+1. Download the Windows ZIP from [Releases](https://github.com/aivrar/Portable_Omni_Server/releases/latest)
+   and extract it to the drive where the studio will live.
+2. Run `Prepare-Omni.cmd`. It downloads the numbered preinstalled-image parts,
+   verifies SHA-256 checksums, and assembles `linux/rootfs.tar.gz`.
+3. Launch `Omni_Studio.exe`. The launcher imports the image into `wsl/` and
+   registers `linbox-Omni_Studio`. The Linux AI dependencies are already installed.
+4. Download the model weights you want inside the app.
 
-### Source repository
+For an offline transfer, download every numbered image part into `linux/parts/`
+and run `Prepare-Omni.cmd -Offline`. The preparation helper does no dependency
+installation. Missing weights, community nodes, gated access and updates can
+still require internet access.
 
-`aivrar/Portable_Omni_Server` contains code, setup instructions, the manual,
-screenshots and tests. Git ignores the distro disk, packaged Windows binaries,
-bootstrap archives, model weights, credentials and generated media. GitHub's
-source ZIP will not be a runnable, fully populated studio.
+Keep the entire app folder together, including `runtime/python/` and the
+runtime DLLs. The `wsl/` disk grows as models and media are added. The app's
+inside-distro free-space display is distinct from the Windows drive's physical
+free space; check both before a large download.
 
-The repository name does not rename the executable or registered distro.
-Existing installations still use `Omni_Studio.exe`, `linbox-Omni_Studio`, and
-the `/opt/omni_studio` paths. Changing those identifiers requires a separate
-migration and launcher qualification.
+## Moving an existing studio
 
-### Portable application release
+Windows records the path of each registered WSL distro. A second extracted
+folder with the same app identity reuses `linbox-Omni_Studio`; it does not
+create an independent studio. Do not drag a registered live VHDX to a new
+location or overwrite it with the clean release image.
 
-A release package must include the required Windows launcher files and a
-prepared, transferable Linux environment, plus any chosen Windows helper
-runtimes. The reviewed launcher source supports a prepared
-`linux/rootfs.tar.gz`; when it is absent and no matching distro is registered,
-it bootstraps from the minimal `linux/ubuntu-base.tar.gz`.
+Use the app's Shutdown button first, then export your studio to a backup:
 
-The current app folder has a roughly 30 MB bootstrap archive and its live
-`wsl/ext4.vhdx`, but **no prepared `linux/rootfs.tar.gz`**. `app.json` also has
-automatic snapshot export disabled. A live VHDX being present is not proof
-that the launcher will adopt a copied disk automatically on a fresh PC.
-The exact distributed launcher and archive must be tested together.
+```powershell
+wsl --export linbox-Omni_Studio "D:/Backups/OmniStudio.tar"
+```
 
-The setup completion stamp is currently absent after the source-only refresh.
-A complete setup/repair run and a clean release export are still needed before
-claiming a ready-to-run offline package. First install, repair, new models,
-and updates can require network access.
+On a destination PC with WSL2 installed and **no existing distro of that name**,
+extract the Windows package and import the backup into its `wsl/` directory:
 
-### Private studio backup
+```powershell
+wsl --import linbox-Omni_Studio "D:/Apps/Portable_Omni_Server/wsl" "D:/Backups/OmniStudio.tar" --version 2
+```
 
-A backup may include the user's entire distro, models and output. Back up
-through a clean shutdown/export procedure; do not copy a live, mounted VHDX
-as if it were an ordinary inactive file. Windows maintains a distro
-registration as well as the disk. Preserve the original until the copied
-environment has been restored and verified.
+Launch the executable from that destination app folder. Preserve the original
+studio and backup until the restored models and outputs have been checked.
+The clean public image contains no personal models, tokens, histories or output.
 
-Never treat the user's working VHDX as the public release image. Prepare a
-separate clean image so access tokens, API keys, histories and private output
-do not ship with the public app. The source repository's ignore rules do not
-remove secrets from a Linux disk image.
+## Source, provenance and qualification
 
-## Before claiming complete portability
+GitHub's automatic source ZIP contains source code and documentation. Use the
+named Windows release asset for the packaged application. The distro and
+launcher derive from [aivrar/portable-linux-in-a-box](https://github.com/aivrar/portable-linux-in-a-box).
 
-1. Bundle or replace the Windows relay's Python dependency, and document the
-   WebView2 strategy alongside the WSL2/GPU host requirements.
-2. Build the launcher from a reproducible source revision or provide the
-   separate launcher build instructions and release artifact provenance.
-3. Finish setup in a clean release distro; define which optional engines are
-   included. Download model weights separately unless redistribution is intended
-   and permitted by their terms.
-4. Export a clean runtime image with matching setup metadata. Verify that the
-   archive, rather than the maintainer's existing WSL registration, is used.
-5. Test from a different directory and Windows account on a fresh host, without
-   developer Python, the original source directory, or an existing Omni distro.
-6. For an offline claim, repeat the supported installed-model smoke test with
-   networking disabled after host prerequisites are satisfied.
+Release assets include checksums, dependency inventories and component
+provenance. Upstream license notices remain with their components; original
+Omni code is MIT. See [third-party terms](../THIRD_PARTY_NOTICES.md) and the
+[maintainer packaging guide](../packaging/README.md).
 
-None of these steps requires altering or deleting the current working studio.
-The [release plan](github-release-plan.md) tracks the preparation boundary.
+The release checks distinguish import/startup tests, empty-queue Comfy node
+discovery and browser navigation from actual model inference. A fresh WSL
+registration on the maintainer's Windows host exercises image transfer without
+claiming a test on every Windows account, PC or GPU. Model-specific evidence
+and limits remain in [feature compatibility](../manual/21-feature-compatibility.md).

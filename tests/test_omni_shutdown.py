@@ -1,3 +1,4 @@
+import ast
 import json
 import os
 import sys
@@ -15,6 +16,19 @@ import omni_shutdown  # noqa: E402
 
 
 class OmniShutdownTests(unittest.TestCase):
+    def test_shutdown_default_respects_bridge_gateway_port(self):
+        tree = ast.parse((SERVER / "omni_shutdown.py").read_text(encoding="utf-8"))
+        assignment = next(node for node in tree.body if isinstance(node, ast.Assign)
+                          and any(isinstance(target, ast.Name) and target.id == "DEFAULT_API_URL"
+                                  for target in node.targets))
+        code = compile(ast.Module(body=[assignment], type_ignores=[]), "shutdown_default", "exec")
+        for bridge, gateway, expected in (("8520", "8530", 8520), ("", "8530", 8530), ("", "", 8200)):
+            with self.subTest(bridge=bridge, gateway=gateway):
+                with mock.patch.dict(os.environ, {"API_PORT": bridge, "OMNI_API_PORT": gateway}):
+                    namespace = {"os": os, "DEFAULT_API_PORT": 8200}
+                    exec(code, namespace)
+                    self.assertEqual(namespace["DEFAULT_API_URL"], f"http://127.0.0.1:{expected}")
+
     def test_kill_pid_records_respects_app_instance(self):
         with tempfile.TemporaryDirectory() as tmp:
             pid_dir = Path(tmp) / "pids"
