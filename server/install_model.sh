@@ -580,12 +580,18 @@ install_moshi() {
     download_weights "kyutai/moshiko-pytorch-bf16" "moshi" 14
 }
 
+install_anygpt_override() {
+    # SpeechTokenizer imports its trainer at package import time. Its metadata
+    # omits beartype, and --no-deps also omits the trainer's Lion optimizer.
+    # Supply both small dependencies while reusing the shared Torch stack.
+    install_override "anygpt" \
+        "encodec" "speechtokenizer>=1.0.1,<2" \
+        "beartype>=0.18,<1" "lion-pytorch>=0.2,<1"
+}
+
 install_anygpt() {
     echo "Installing AnyGPT override packages..."
-
-    # encodec and speechtokenizer are small -- no-deps is safe
-    install_override "anygpt" \
-        "encodec" "speechtokenizer"
+    install_anygpt_override
 
     # NOTE: The DAMO-NLP-SG/AnyGPT repo is NOT cloned. It contains multi-GB
     # LFS objects and stalls on clone. The model loader uses standard
@@ -2432,7 +2438,7 @@ case "$MODEL" in
             qwen3) install_override_with_deps "qwen3" "qwen-omni-utils[decord]" ;;
             nemotron) install_override "nemotron" ;;
             moshi) install_override "moshi" "moshi" "rustymimi" "sphn" "einops" "sounddevice" ;;
-            anygpt) install_override "anygpt" "encodec" "speechtokenizer" ;;
+            anygpt) install_anygpt_override ;;
             minimax_music3)
                 install_override_unconstrained "minimax_music3" \
                     "git+https://github.com/huggingface/diffusers.git@dafe3733fcfdbf3c48915fe77be3aef65b5d6a2d"

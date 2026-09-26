@@ -74,6 +74,7 @@ test "$(git -C "$OVERRIDES_DIR/moss_tts_repo" rev-parse HEAD)" = "$wanted"
             "install_override_with_deps", "install_override",
             "install_override_unconstrained", "ensure_moss_source",
             "install_moss_tts_runtime", "install_moss_sfx_runtime",
+            "install_anygpt_override",
         )
         stubs = "\n".join(f'{name}() {{ echo {name}; }}' for name in allowed)
         script = 'set -euo pipefail\n' + stubs + '\ncase "$1" in\nruntimes)\n' + branch + '\nesac\n'

@@ -2497,6 +2497,12 @@ disk is not a release input.
   `install_model.sh runtimes FAMILY`, a separate dispatch for the nine isolated
   runtime families. Its test exercises every family with only dependency
   helpers available, and rejects unknown families. No API route was added.
+- **P-07 — AnyGPT codec runtime omitted import dependencies:** the clean build
+  exposed `ModuleNotFoundError: beartype` when SpeechTokenizer imported its
+  trainer. The trainer also needs `lion-pytorch`, omitted by the deliberate
+  `--no-deps` install. Both are now installed by one shared AnyGPT override
+  helper used by full and dependency-only installs. The repaired codec, trainer
+  and optimizer import together successfully in the clean Linux environment.
 
 The clean main setup completed with real success stamps and import checks for
 ACE-Step and Stable Audio, plus installed pinned ComfyUI and Manager. The
