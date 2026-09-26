@@ -141,6 +141,28 @@ remains built from the runtime revision recorded above; the Windows package
 records its later source revision separately. P-09 and P-10 in the main audit
 describe the two findings from this final restore pass.
 
+## Published release and cleanup
+
+[Version 1.0.0](https://github.com/aivrar/Portable_Omni_Server/releases/tag/v1.0.0)
+was published as the normal latest release at **2026-09-26 01:36:44 UTC**
+(September 25 in the maintainer's timezone), with 12 assets. It is neither a
+draft nor a prerelease. The tag points to Windows/source revision
+`4b9ef4540e09c840fe1e32b2277fdcc7d773d3bd`; the manifest separately identifies
+the Linux image's runtime revision.
+
+All 12 GitHub asset sizes and server-reported SHA-256 digests matched the local
+release inventory. Anonymous HTTPS downloads through the preparation helper's
+Windows .NET HTTP stack additionally verified the complete Windows ZIP,
+manifest, checksum file and eighth image part, including their full hashes.
+
+- Windows ZIP: **15,973,318 bytes**; SHA-256
+  `37b0b14f137bea314ba5e41fc3a85762c8c76a54f56f5bd45c57f1602b959f9e`.
+- The wiki's corrected disk-layout pages were pushed in revision `2d93501`.
+- Both temporary build/restore registrations were unregistered only after
+  checking their exact names and BasePaths against the owned temporary folders.
+  Large temporary image copies were removed after public download verification.
+  The verified Windows ZIP, small manifests and test evidence were retained.
+
 ## Qualification scope
 
 Dependency installation and import success are distinct from model inference.

@@ -117,6 +117,11 @@ passed. First import and connected-browser qualification took about ten
 minutes on this host. The release delivers the preinstalled image alongside
 the Windows ZIP; model weights remain separate.
 
+[Version 1.0.0 is published](https://github.com/aivrar/Portable_Omni_Server/releases/tag/v1.0.0)
+as the latest normal release with 12 verified assets. The illustrated wiki is
+also live. The release report records source revisions, image and ZIP hashes,
+anonymous download verification and temporary-build cleanup.
+
 Release notes must list included engines, whether weights are included or
 downloaded on demand, host requirements, known capability limits, and the exact
 qualification results. Publish archive checksums and launcher provenance with

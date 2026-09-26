@@ -2546,3 +2546,9 @@ shutdown passed. The personal studio remained healthy. The
 hashes and exact scope. This addresses the missing distributable image and
 fresh-registration/relocation checks on the current host; it does not claim
 testing on another physical PC/account or infer model-generation results.
+
+The [v1.0.0 release](https://github.com/aivrar/Portable_Omni_Server/releases/tag/v1.0.0)
+is now public. All 12 uploaded asset hashes/sizes matched the release inventory;
+anonymous downloads of the Windows ZIP, manifest, checksums and one complete
+image part also passed SHA-256 verification. The two owned temporary WSL
+registrations and large build copies were cleaned up after verification.
