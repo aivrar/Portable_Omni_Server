@@ -172,7 +172,9 @@ Existing engine-specific results and supported modalities remain documented in
 
 Some intentionally isolated upstream packages declare older or conflicting
 dependency pins; runtime import checks passed, but this is not a claim that
-every environment passes an unconstrained `pip check`. WSL2, WebView2,
-hardware virtualization and the Windows NVIDIA driver remain host prerequisites.
+every environment passes an unconstrained `pip check`. WSL2, WebView2 and
+hardware virtualization remain host prerequisites. A compatible NVIDIA GPU
+and Windows driver are required for CUDA workloads; CPU-capable workloads can
+use the CPU. Both Linux and embedded Windows Python are included.
 Testing on this Windows host does not establish behavior on every account,
 physical PC, GPU or driver combination.

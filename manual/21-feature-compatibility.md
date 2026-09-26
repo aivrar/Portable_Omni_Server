@@ -1,10 +1,27 @@
 # Feature compatibility
 
-Use this guide to choose engines, input types and GPUs for your task.
+Use this guide to choose engines, input types and CPU/GPU devices for your task.
 Each model family has its own supported modalities, runtime dependencies
 and memory requirements. Read it alongside the individual workspace pages.
 Installation and worker readiness describe different states from successful
 generation; the sections below explain the requirements for each task.
+
+## CPU and GPU support
+
+The workspace, API and CLI do not require CUDA. CPU-capable models and
+workflows can use the CPU, subject to system RAM and the selected engine's
+requirements. CPU generation can be much slower than GPU generation.
+
+ComfyUI provides a [CPU execution mode](https://github.com/Comfy-Org/ComfyUI/blob/master/comfy/cli_args.py).
+Omni's release checks started ComfyUI explicitly on CPU and discovered its
+nodes with an empty queue. That establishes CPU startup and integration;
+generation still depends on the chosen model and nodes. Some engines,
+quantization kernels and custom nodes specifically require CUDA. Check the
+requirements for the task you intend to run.
+
+Python is bundled for both sides of the portable app: Linux Python and model
+environments inside the distro, and Windows Python for the networking relay.
+No separate Python installation is required.
 
 ## Speech workspaces
 

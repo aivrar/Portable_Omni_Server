@@ -15,9 +15,10 @@ do need the Windows-side requirements in
 
 > [!IMPORTANT]
 > **Install WSL2 on Windows before launching the distro.** Enable hardware
-> virtualization, install the WebView2 Runtime, and use a compatible NVIDIA
-> Windows driver for GPU workloads. The host requirements page also covers
-> the Windows networking helper and disk space.
+> virtualization and install the WebView2 Runtime. CPU-capable workloads can
+> run without an NVIDIA GPU; CUDA workloads need a compatible NVIDIA GPU and
+> Windows driver. Python is included. The host requirements page also covers
+> CPU/GPU selection and disk space.
 
 This manual is written as how-to prose. Each page walks through the actual
 buttons, fields, and consequences of using that part of the app. It is not a

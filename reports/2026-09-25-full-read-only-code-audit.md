@@ -2552,3 +2552,15 @@ is now public. All 12 uploaded asset hashes/sizes matched the release inventory;
 anonymous downloads of the Windows ZIP, manifest, checksums and one complete
 image part also passed SHA-256 verification. The two owned temporary WSL
 registrations and large build copies were cleaned up after verification.
+
+### P-11 — CPU and bundled-Python requirements clarification
+
+The README listed bundled Windows Python in the host-requirements table, and
+the first-run manual treated an NVIDIA GPU as mandatory even though ComfyUI's
+CPU startup had passed during release qualification. The README, manual,
+portability and packaging guides now make CPU-capable workloads explicit,
+reserve the NVIDIA requirement for CUDA workloads, and explain that both
+Linux Python/model environments and the Windows relay interpreter are bundled.
+CPU model support remains engine- and node-specific; the existing CPU startup
+check is not presented as a complete CPU inference campaign. This correction
+changes documentation and release notes, with no runtime or image changes.

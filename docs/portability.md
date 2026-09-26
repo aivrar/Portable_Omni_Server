@@ -33,12 +33,22 @@ engine's supported inputs and behavior.
 - 64-bit Windows 11, or Windows 10 21H2 or later for WSL GPU workloads.
 - WSL2 with hardware virtualization enabled.
 - Microsoft WebView2 Runtime for the desktop window.
-- A compatible NVIDIA GPU and Windows driver for CUDA workloads.
 - At least 80 GiB free on the Windows drive containing the app for image
   preparation/import, plus room for selected model weights and generated media.
 
-WSL2, Windows GPU drivers and WebView2 are host components. They are not stored
-in the Linux disk. Microsoft provides the [WSL installation guide](https://learn.microsoft.com/en-us/windows/wsl/install),
+**CPU use:** the workspace and CPU-capable workloads can run without an NVIDIA
+GPU. CPU generation depends on the chosen engine, model, custom nodes and
+available system RAM, and can be much slower than GPU generation. A compatible
+NVIDIA GPU and Windows driver are needed for CUDA workloads, including models
+or nodes that specifically require CUDA. ComfyUI's CPU startup and node
+discovery passed during release qualification.
+
+**Python is included:** both the Linux Python/model environments and the
+embedded Windows Python networking helper come with the portable release.
+Users do not need to install Python separately.
+
+WSL2, WebView2 and any GPU driver used for CUDA are host components. They are
+not stored in the Linux disk. Microsoft provides the [WSL installation guide](https://learn.microsoft.com/en-us/windows/wsl/install),
 [GPU prerequisites](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute),
 and [WebView2 Runtime guidance](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution).
 

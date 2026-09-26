@@ -12,7 +12,7 @@ output never appear as ordinary folders next to the `.exe`.
 > before launching `Omni_Studio.exe`.
 
 If you have used a website that "runs in the cloud," this is the opposite: the
-compute is local, the GPU is yours, and the files stay on this machine. If you
+compute uses your CPU or supported GPU, and the files stay on this machine. If you
 have used Docker Desktop or a Linux VM, this is simpler: you do not provision
 an OS. You keep one app folder together and double-click `Omni_Studio.exe`.
 
@@ -109,32 +109,32 @@ underlying Linux distro can still be reached from a terminal, and
 intended operator path. Install the Evergreen WebView2 Runtime from Microsoft
 and relaunch.
 
-### Bundled Windows networking helper
+### Included Python runtimes
 
-The release includes Windows Python under `runtime/python/` for the loopback
-networking relay. Keep that directory with the app; a separate Windows Python
-installation is unnecessary. The model environments remain inside the Linux
-distro. Older source-based installations can still use a host `pythonw.exe`
-when the bundled interpreter is absent.
+Python is already included in the portable release. Linux Python and the
+model environments live inside the distro. A second, embedded Windows Python
+under `runtime/python/` runs the loopback networking relay. Keep that directory
+with the app; users do not need to install Python on Windows or inside the
+packaged distro. Older source-based installations can still use a host
+`pythonw.exe` when the bundled interpreter is absent.
 
-### NVIDIA GPU
+### CPU use and optional NVIDIA GPU
 
-Omni Studio is a local GPU studio. A current **NVIDIA GPU** with a Windows
-driver that exposes the device to WSL2 is the practical requirement.
+An NVIDIA GPU is not required to open the workspace or run CPU-capable
+workloads. Select CPU for an engine that supports it. ComfyUI has a CPU mode;
+its CPU startup and node discovery passed during release qualification.
 
-What "practical" means:
+Generation support depends on the selected engine, model and custom nodes.
+CPU execution can be much slower and needs enough system RAM. Some models,
+quantization kernels or nodes specifically require CUDA, so a CPU option in
+one workspace does not establish CPU support for every model. See
+[feature compatibility](21-feature-compatibility.md).
 
-- Chat, Music, Audio Lab, Music 3, MOSS, and ComfyUI workflows expect CUDA
-  devices such as `cuda:0`.
-- The Runtime tab lists those devices with free/total VRAM.
-- CPU options exist on several forms. They are fallbacks for tiny tests, not
-  a replacement for a 12 GB or 24 GB card.
-- Two GPUs are useful. Placement can put a diffusion model on one card and a
-  text encoder on another. One strong GPU is enough to start.
-
-Install the NVIDIA Windows Game Ready or Studio driver, then confirm WSL can
-see the GPU from inside the distro after first launch. If Runtime shows only
-CPU, stop and fix drivers before downloading 20 GB checkpoints.
+A compatible NVIDIA GPU provides CUDA acceleration. For CUDA workloads,
+install the NVIDIA Windows driver and confirm that Runtime lists the GPU
+with its free/total VRAM. A CPU-only device list is expected on a machine
+without a CUDA GPU. If you intend to use an installed NVIDIA GPU but it is
+missing from Runtime, check the Windows driver and WSL GPU setup.
 
 ### Disk headroom
 

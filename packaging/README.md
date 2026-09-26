@@ -2,8 +2,10 @@
 
 The release combines the Windows launcher, its bundled Python relay, and a
 clean Linux root filesystem with engine dependencies installed. Model weights
-are downloaded separately. WSL2, virtualization, WebView2, and the Windows
-NVIDIA driver remain host requirements.
+are downloaded separately. WSL2, virtualization and WebView2 remain host
+requirements. A compatible NVIDIA GPU and Windows driver are needed for CUDA
+workloads; CPU-capable workloads can use the CPU. Both Linux and Windows
+Python runtimes are included in the portable release.
 
 ## User package
 

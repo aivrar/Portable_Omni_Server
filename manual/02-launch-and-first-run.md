@@ -7,16 +7,17 @@ before you click Chat.
 ## Before you double-click
 
 1. Confirm the host matches [What Omni Studio is](01-what-omni-studio-is.md):
-   **Windows 11 or Windows 10 21H2 or later**, **WSL2**, **WebView2**, an
-   **NVIDIA GPU** with current drivers, and
-   **disk headroom** on the drive that holds the app.
+   **Windows 11 or Windows 10 21H2 or later**, **WSL2**, **WebView2**, and
+   **disk headroom** on the drive that holds the app. A compatible NVIDIA GPU
+   and Windows driver are needed for CUDA workloads; CPU-capable workloads
+   can use the CPU. Python is included in the release.
 2. Confirm the folder still contains `Omni_Studio.exe`, `webview.dll`,
    `app.json`, `bridge.py`, `bridge_watchdog.py`, `runtime/`, and `linux/`.
    The preinstalled-image import creates `ext4.vhdx` beside the executable.
    Older bootstrap installations can use `wsl/ext4.vhdx` instead.
    **Keep the app folder together.**
-3. Close other GPU-heavy apps if this is the first boot. First-time WSL CUDA
-   initialization plus gateway start is slower when the card is already full.
+3. If using a GPU, close other GPU-heavy apps. First-time WSL CUDA initialization
+   can be slower when the card is already full.
 4. If this PC has never used WSL, run `wsl --install` once as Administrator
    and reboot. Do not skip that reboot.
 
@@ -32,7 +33,8 @@ the internet. Keep the terminal open until it says **Ready**.
 For an offline transfer, download every `omni-rootfs-...tar.gz.001` (and following
 numbered part) asset into `linux/parts/` beside the extracted app. Run
 `Prepare-Omni.cmd -Offline` to verify and assemble them without network access.
-The destination PC still needs WSL2, WebView2 and its Windows GPU driver.
+The destination PC still needs WSL2 and WebView2, plus a compatible Windows
+GPU driver if using CUDA workloads. Python is already included.
 Model weights are downloaded separately through Model library.
 
 **Do this:** in File Explorer, open the Omni Studio folder and double-click

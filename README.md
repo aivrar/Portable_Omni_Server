@@ -5,8 +5,9 @@
 > [!IMPORTANT]
 > **Portable Omni Server is a Linux distro. Windows users must install WSL2
 > and enable hardware virtualization.** The desktop window also requires
-> Microsoft WebView2. GPU workloads require a compatible NVIDIA GPU and
-> Windows driver with WSL support.
+> Microsoft WebView2. CPU-capable workloads can run without an NVIDIA GPU;
+> CUDA workloads require a compatible NVIDIA GPU and Windows driver with WSL
+> support. Python is included in the portable release.
 
 Maintained by [aivrar](https://github.com/aivrar).
 
@@ -44,10 +45,19 @@ modalities, engine requirements and task-specific behavior.
 | 64-bit Windows 11, or Windows 10 21H2 or later | Windows host for the launcher and WSL GPU workloads |
 | WSL2 and hardware virtualization | Runs the Linux distro |
 | Microsoft WebView2 Runtime | Displays the desktop workspace |
-| Compatible NVIDIA GPU and Windows driver | CUDA model workloads; VRAM needs depend on the model |
-| Bundled Windows Python | Included in the release for the loopback networking relay; no separate Python installation needed |
 | Free disk space | Holds the growing Linux disk, model downloads and generated media |
 | Internet access for downloads and updates | Obtains the release image, model weights and optional components |
+
+**CPU or GPU:** the workspace and CPU-capable workflows can run on CPU.
+CPU generation can be much slower and needs enough system RAM. A compatible
+NVIDIA GPU and Windows driver enable CUDA acceleration; some models and
+custom nodes specifically require CUDA. Check the selected engine's
+[compatibility requirements](manual/21-feature-compatibility.md).
+
+**Python is already included.** The Linux image contains Python and the model
+environments. The Windows package also contains an embedded Python under
+`runtime/python/` for its networking relay. Neither requires a separate Python
+installation on the user's PC.
 
 Install WSL from **PowerShell as Administrator**, then restart Windows:
 
