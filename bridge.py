@@ -298,6 +298,14 @@ def _windows_path(path: Path) -> str:
 
 
 def _find_windows_pythonw() -> Path | None:
+    # The launcher supplies its current directory on every launch, including
+    # after the portable folder has moved. Prefer our embedded runtime so a
+    # packaged app does not depend on a separate Windows Python installation.
+    app_dir = os.environ.get("TQ_APP_DIR", "").strip()
+    if app_dir:
+        bundled = Path(app_dir) / "runtime" / "python" / "pythonw.exe"
+        if bundled.is_file():
+            return bundled
     candidates = []
     try:
         result = subprocess.run(

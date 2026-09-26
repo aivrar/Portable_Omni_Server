@@ -108,16 +108,13 @@ underlying Linux distro can still be reached from a terminal, and
 intended operator path. Install the Evergreen WebView2 Runtime from Microsoft
 and relaunch.
 
-### Windows Python for the current loopback relay
+### Bundled Windows networking helper
 
-The current bridge launches its Windows loopback networking helper through
-`pythonw.exe` installed on the Windows host. This is separate from the Linux
-Python environment in the distro. Without it, the helper is unavailable and
-connectivity depends on WSL's native localhost forwarding behavior.
-
-Install Windows Python with `pythonw.exe` available to the current user when
-using this relay. The Linux venv remains inside the distro; the relay uses
-the Windows interpreter only for the host networking helper.
+The release includes Windows Python under `runtime/python/` for the loopback
+networking relay. Keep that directory with the app; a separate Windows Python
+installation is unnecessary. The model environments remain inside the Linux
+distro. Older source-based installations can still use a host `pythonw.exe`
+when the bundled interpreter is absent.
 
 ### NVIDIA GPU
 

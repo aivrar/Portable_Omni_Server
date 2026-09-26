@@ -28,6 +28,7 @@ if [ -z "$MODEL" ]; then
     echo "Custom node:    comfy-node <repo_url> [ref]"
     echo "Update Comfy:   comfyui-update [ref]"
     echo "Maintenance:    repair-venv | prune-caches | verify-models [model_id]"
+    echo "Runtime only:   runtimes <qwen|minicpm|qwen3|nemotron|moshi|anygpt|minimax_music3|moss_tts|moss_sfx>"
     echo "Defaults:       install-missing-defaults"
     exit 1
 fi
@@ -599,16 +600,19 @@ ensure_moss_source() {
     local dest="$OVERRIDES_DIR/moss_tts_repo"
     if [ -d "$dest/.git" ]; then
         echo "Updating MOSS source at $dest..."
-        git -C "$dest" fetch --depth 1 origin "$ref" || git -C "$dest" fetch --depth 1 origin
-        git -C "$dest" checkout --force FETCH_HEAD 2>/dev/null || git -C "$dest" checkout --force "$ref"
     else
-        echo "Cloning MOSS source to $dest..."
-        rm -rf "$dest"
-        git clone --depth 1 --branch "$ref" "$repo" "$dest" 2>/dev/null || {
-            git clone --depth 1 "$repo" "$dest"
-            git -C "$dest" checkout --force "$ref" 2>/dev/null || true
-        }
+        if [ -e "$dest" ]; then
+            echo "ERROR: MOSS source exists without Git metadata: $dest" >&2
+            return 1
+        fi
+        echo "Preparing MOSS source at $dest..."
+        git init -q "$dest" || return 1
+        git -C "$dest" remote add origin "$repo" || return 1
     fi
+    # A requested revision must never silently fall back to the default branch.
+    # Fetch also accepts an exact commit SHA, unlike clone --branch.
+    git -C "$dest" fetch --depth 1 "$repo" "$ref" || return 1
+    git -C "$dest" checkout --force --detach FETCH_HEAD || return 1
     if [ ! -f "$dest/pyproject.toml" ] || [ ! -d "$dest/moss_soundeffect_v2" ]; then
         echo "ERROR: MOSS source checkout is incomplete: $dest" >&2
         return 1
@@ -2418,6 +2422,26 @@ PYEOF
 # ---------------------------------------------------------------------------
 
 case "$MODEL" in
+    runtimes)
+        # Release preparation and offline provisioning: install code and
+        # dependencies only. Keep this dispatch separate from weight installers
+        # so a runtime build can never accidentally download a checkpoint.
+        case "${2:-}" in
+            qwen) install_qwen_override ;;
+            minicpm) install_minicpm_override ;;
+            qwen3) install_override_with_deps "qwen3" "qwen-omni-utils[decord]" ;;
+            nemotron) install_override "nemotron" ;;
+            moshi) install_override "moshi" "moshi" "rustymimi" "sphn" "einops" "sounddevice" ;;
+            anygpt) install_override "anygpt" "encodec" "speechtokenizer" ;;
+            minimax_music3)
+                install_override_unconstrained "minimax_music3" \
+                    "git+https://github.com/huggingface/diffusers.git@dafe3733fcfdbf3c48915fe77be3aef65b5d6a2d"
+                ;;
+            moss_tts) ensure_moss_source; install_moss_tts_runtime ;;
+            moss_sfx) ensure_moss_source; install_moss_sfx_runtime ;;
+            *) echo "ERROR: unknown runtime family: ${2:-missing}" >&2; exit 1 ;;
+        esac
+        ;;
     install-missing-defaults|defaults)
         install_missing_defaults
         ;;

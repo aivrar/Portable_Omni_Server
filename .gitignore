@@ -44,6 +44,10 @@ terminals/
 /Omni_Studio.exe
 /Omni_Studio.exe.pre-icon-backup
 /webview.dll
+/*.dll
+/runtime/
+/linux/parts/
+/release-manifest.json
 /*.zip
 /*.7z
 

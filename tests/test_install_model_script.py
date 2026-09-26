@@ -29,6 +29,65 @@ def _extract_shell_function(source: str, name: str) -> str:
 
 
 class InstallModelScriptTests(unittest.TestCase):
+    def test_moss_source_honors_exact_revision_and_rejects_missing_ref(self):
+        bash_path = Path("C:/Program Files/Git/bin/bash.exe")
+        bash = str(bash_path) if bash_path.exists() else shutil.which("bash")
+        if not bash:
+            self.skipTest("bash is not available")
+        function = _extract_shell_function(INSTALLER.read_text(encoding="utf-8"), "ensure_moss_source")
+        script = r'''
+set -euo pipefail
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+git init -q "$tmp/upstream"
+mkdir -p "$tmp/upstream/moss_soundeffect_v2"
+touch "$tmp/upstream/pyproject.toml" "$tmp/upstream/moss_soundeffect_v2/__init__.py"
+git -C "$tmp/upstream" add .
+git -C "$tmp/upstream" -c user.name=Test -c user.email=test@example.invalid -c commit.gpgsign=false commit -qm fixture
+wanted="$(git -C "$tmp/upstream" rev-parse HEAD)"
+OVERRIDES_DIR="$tmp/overrides"
+mkdir -p "$OVERRIDES_DIR"
+OMNI_MOSS_TTS_REPO="$tmp/upstream"
+OMNI_MOSS_TTS_REF=missing-ref
+''' + function + r'''
+if ensure_moss_source; then echo 'Unexpected fallback to HEAD'; exit 9; fi
+OMNI_MOSS_TTS_REF="$wanted"
+ensure_moss_source
+test "$(git -C "$OVERRIDES_DIR/moss_tts_repo" rev-parse HEAD)" = "$wanted"
+OMNI_MOSS_TTS_REF=missing-ref
+if ensure_moss_source; then echo 'Unexpected update fallback'; exit 10; fi
+test "$(git -C "$OVERRIDES_DIR/moss_tts_repo" rev-parse HEAD)" = "$wanted"
+'''
+        result = subprocess.run([bash, "-s"], input=script.encode(), capture_output=True, timeout=20)
+        self.assertEqual(result.returncode, 0, result.stderr.decode(errors="replace"))
+
+    def test_runtime_only_dispatch_never_enters_weight_installers(self):
+        bash_path = Path("C:/Program Files/Git/bin/bash.exe")
+        bash = str(bash_path) if bash_path.exists() else shutil.which("bash")
+        if not bash:
+            self.skipTest("bash is not available")
+        source = INSTALLER.read_text(encoding="utf-8")
+        branch = source.split('    runtimes)\n', 1)[1].split(
+            '    install-missing-defaults|defaults)', 1)[0]
+        allowed = (
+            "install_qwen_override", "install_minicpm_override",
+            "install_override_with_deps", "install_override",
+            "install_override_unconstrained", "ensure_moss_source",
+            "install_moss_tts_runtime", "install_moss_sfx_runtime",
+        )
+        stubs = "\n".join(f'{name}() {{ echo {name}; }}' for name in allowed)
+        script = 'set -euo pipefail\n' + stubs + '\ncase "$1" in\nruntimes)\n' + branch + '\nesac\n'
+        for family in ("qwen", "minicpm", "qwen3", "nemotron", "moshi", "anygpt",
+                       "minimax_music3", "moss_tts", "moss_sfx"):
+            with self.subTest(family=family):
+                result = subprocess.run([bash, "-s", "--", "runtimes", family],
+                                        input=script.encode(), capture_output=True, timeout=10)
+                self.assertEqual(result.returncode, 0, result.stderr.decode())
+                self.assertTrue(result.stdout.strip())
+        rejected = subprocess.run([bash, "-s", "--", "runtimes", "all"],
+                                  input=script.encode(), capture_output=True, timeout=10)
+        self.assertNotEqual(rejected.returncode, 0)
+
     def test_install_override_without_packages_writes_marker_without_pip(self):
         bash = str(Path("C:/Program Files/Git/bin/bash.exe")) if Path("C:/Program Files/Git/bin/bash.exe").exists() else (None if __import__("os").name == "nt" else shutil.which("bash"))
         if not bash:

@@ -1,9 +1,13 @@
+import ast
 import http.server
+import os
+import subprocess
 import tempfile
 import threading
 import unittest
 import urllib.request
 from pathlib import Path
+from unittest.mock import patch
 
 import windows_loopback_relay as relay
 
@@ -26,6 +30,25 @@ class _ResponseHandler(http.server.BaseHTTPRequestHandler):
 
 
 class WindowsLoopbackRelayTests(unittest.TestCase):
+    def test_bundled_python_wins_without_host_discovery(self):
+        # Extract the pure resolver without importing bridge startup globals.
+        source = Path(__file__).resolve().parents[1] / "bridge.py"
+        tree = ast.parse(source.read_text(encoding="utf-8"))
+        resolver = next(node for node in tree.body
+                        if isinstance(node, ast.FunctionDef)
+                        and node.name == "_find_windows_pythonw")
+        namespace = {"Path": Path, "os": os, "subprocess": subprocess}
+        exec(compile(ast.Module(body=[resolver], type_ignores=[]),
+                     str(source), "exec"), namespace)
+        with tempfile.TemporaryDirectory(prefix="omni relocated ") as tmp:
+            bundled = Path(tmp) / "runtime" / "python" / "pythonw.exe"
+            bundled.parent.mkdir(parents=True)
+            bundled.touch()
+            with patch.dict(os.environ, {"TQ_APP_DIR": tmp}):
+                with patch.object(subprocess, "run") as discover:
+                    self.assertEqual(namespace["_find_windows_pythonw"](), bundled)
+                    discover.assert_not_called()
+
     def test_relay_forwards_http_bytes(self):
         upstream = http.server.ThreadingHTTPServer(("127.0.0.1", 0), _ResponseHandler)
         upstream_thread = threading.Thread(target=upstream.serve_forever, daemon=True)

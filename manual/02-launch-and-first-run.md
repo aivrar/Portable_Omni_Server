@@ -8,16 +8,31 @@ before you click Chat.
 
 1. Confirm the host matches [What Omni Studio is](01-what-omni-studio-is.md):
    **Windows 11 or Windows 10 21H2 or later**, **WSL2**, **WebView2**, an
-   **NVIDIA GPU** with current drivers, **Windows Python for the relay**, and
+   **NVIDIA GPU** with current drivers, and
    **disk headroom** on the drive that holds the app.
 2. Confirm the folder still contains `Omni_Studio.exe`, `webview.dll`,
-   `app.json`, `linux/`, and `wsl/`. **Keep the app folder together.**
+   `app.json`, `bridge.py`, `bridge_watchdog.py`, `runtime/`, and `linux/`.
+   The launcher creates `wsl/` when importing the distro.
+   **Keep the app folder together.**
 3. Close other GPU-heavy apps if this is the first boot. First-time WSL CUDA
    initialization plus gateway start is slower when the card is already full.
 4. If this PC has never used WSL, run `wsl --install` once as Administrator
    and reboot. Do not skip that reboot.
 
 ## Start the app
+
+Download and extract the Windows ZIP from
+[Releases](https://github.com/aivrar/Portable_Omni_Server/releases/latest).
+Run `Prepare-Omni.cmd` once. It downloads the Linux image parts, verifies their
+SHA-256 checksums, and joins them into `linux/rootfs.tar.gz`. The image already
+contains the Linux dependencies; preparation does not install an AI stack from
+the internet. Keep the terminal open until it says **Ready**.
+
+For an offline transfer, download every `omni-rootfs-...tar.gz.001` (and following
+numbered part) asset into `linux/parts/` beside the extracted app. Run
+`Prepare-Omni.cmd -Offline` to verify and assemble them without network access.
+The destination PC still needs WSL2, WebView2 and its Windows GPU driver.
+Model weights are downloaded separately through Model library.
 
 **Do this:** in File Explorer, open the Omni Studio folder and double-click
 `Omni_Studio.exe`.
@@ -31,9 +46,10 @@ VHDX already exists. A first GPU-using start (ComfyUI, a large worker) can
 still spend extra minutes while WSL initializes the shared CUDA driver. That
 delay is driver bring-up, not model download.
 
-Do not launch a second copy of `Omni_Studio.exe` from a second unzipped
-folder and expect them to share models. Each app folder is a launcher for
-its own distro disk.
+Windows registers the name `linbox-Omni_Studio` once per user. A second extracted
+folder with the same app identity reuses that registration. Keep one active
+installation folder; do not treat a second extraction as an independent studio
+or overwrite an existing studio's disk.
 
 ![Connected Omni Studio Home](images/home.png)
 

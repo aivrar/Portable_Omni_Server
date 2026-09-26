@@ -45,9 +45,9 @@ modalities, engine requirements and task-specific behavior.
 | WSL2 and hardware virtualization | Runs the Linux distro |
 | Microsoft WebView2 Runtime | Displays the desktop workspace |
 | Compatible NVIDIA GPU and Windows driver | CUDA model workloads; VRAM needs depend on the model |
-| Windows Python providing `pythonw.exe` | Runs the current Windows loopback networking relay |
+| Bundled Windows Python | Included in the release for the loopback networking relay; no separate Python installation needed |
 | Free disk space | Holds the growing Linux disk, model downloads and generated media |
-| Internet access for setup, downloads and updates | Obtains dependencies, model weights and optional components |
+| Internet access for downloads and updates | Obtains the release image, model weights and optional components |
 
 Install WSL from **PowerShell as Administrator**, then restart Windows:
 
@@ -60,14 +60,19 @@ After restarting, check `wsl --status`. See Microsoft's
 and [GPU setup guide](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute).
 Omni Studio uses its own distro named `linbox-Omni_Studio`.
 
-For a packaged installation, keep the app folder together and launch
-`Omni_Studio.exe`. Follow [Launch and first run](manual/02-launch-and-first-run.md).
+Download the Windows package from [Releases](https://github.com/aivrar/Portable_Omni_Server/releases/latest).
+Extract it, run `Prepare-Omni.cmd` to download and verify the preinstalled Linux
+image, then launch `Omni_Studio.exe`. Keep the app folder together. Model weights
+are selected and downloaded inside the app. Follow
+[Launch and first run](manual/02-launch-and-first-run.md).
 The GitHub source checkout contains the application code and documentation;
 the Windows launcher binaries, Linux runtime image and model weights are
 separate package components. See [package contents](docs/portability.md).
 
 ## Start here
 
+- [GitHub wiki](https://github.com/aivrar/Portable_Omni_Server/wiki): the full
+  illustrated operator manual with page navigation.
 - [Usage manual](manual/README.md): launching the packaged app, each UI tab,
   the CLI, GPU placement, shutdown, and feature compatibility.
 - [API capability inventory](docs/api-capability-inventory.md): route families

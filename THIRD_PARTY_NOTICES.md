@@ -18,6 +18,23 @@ Omni Studio's distro packaging and Windows launcher were built from
 also maintained by `aivrar`. Preserve that project's license and existing
 notices when distributing its launcher or other code with this app.
 
+## Windows release runtimes
+
+The prepared Windows package includes the official Python embeddable runtime
+under `runtime/python/`, with its original `LICENSE.txt`. The launcher and
+WebView integration also use Microsoft Visual C++ runtime DLLs distributed
+beside the executable. These Microsoft components retain their own terms;
+they are not covered by this project's MIT license. Their license is retained
+under the package's `licenses/` directory and available from
+[Microsoft](https://aka.ms/VCRedistLicense). App-local deployment is described
+in Microsoft's [deployment documentation](https://learn.microsoft.com/en-us/cpp/windows/choosing-a-deployment-method).
+
+The package's `licenses/` directory also retains the launcher foundation and
+webview project's MIT notices. Dependency inventories and release provenance
+identify the packaged versions. Linux package copyright files, Python package
+license metadata and upstream source checkout notices remain in the distro.
+Model weights are obtained separately under their respective model terms.
+
 ## Media and historical evidence
 
 The selected PNGs under `manual/images/` were captured from Omni Studio for

@@ -16,6 +16,8 @@ durable evidence, and generated runtime state at a glance.
   README, with dimensions and hashes in `manifest.json`. These are deliberate
   documentation assets; raw captures and browser profiles stay outside the repo.
 - `tests/`: regression and contract tests, including dated security regressions.
+- `packaging/`: release preparation helper and maintainer build instructions.
+- `tools/`: maintained repository tools, including the manual-to-wiki exporter.
 - `test_assets/`: deliberately retained, reusable capability-test inputs.
 - `assets/branding/`: editable app-icon artwork and its PNG export.
 - `app.ico`, `app-icon.rc`: packaged Windows icon and executable resource source;
@@ -31,6 +33,8 @@ durable evidence, and generated runtime state at a glance.
 - `linux/ubuntu-base.tar.gz` and `linux/rootfs.setup_hash`: local distro
   bootstrap inputs used by the packaged launcher.
 - `Omni_Studio.exe` and `webview.dll`: local Windows application runtime.
+- Release packages also include `runtime/python/` and app-local Microsoft C++
+  runtime DLLs; these generated binary components stay outside Git.
 - `Omni_Studio.exe.pre-icon-backup`: original launcher retained during the icon
   update; local backup, excluded from Git.
 

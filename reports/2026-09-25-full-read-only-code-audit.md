@@ -2471,3 +2471,35 @@ Validation after these documentation changes: all five
 `tests.test_manual_coverage` tests passed. No runtime restart, setup run,
 dependency installation, model load, inference, export or publication was
 performed during this preparation.
+
+## Preinstalled release preparation follow-up — 2026-09-25
+
+The maintainer authorized the larger preinstalled distro, with model weights
+downloaded separately, after the source repository was published. The new
+work is in a separately registered clean build distro; the personal studio
+disk is not a release input.
+
+- **P-01 source repair:** `bridge.py` now prefers the embedded Windows Python
+  beneath the launcher's current `TQ_APP_DIR`. Relay transport, lease handling,
+  and relocation-path tests pass using the actual embedded interpreter.
+- **P-04 — Native launcher C++ runtime dependency:** inspecting PE imports
+  found `MSVCP140`, `VCRUNTIME140`, and `VCRUNTIME140_1` requirements. The Windows
+  package now stages the signed Microsoft x64 runtime alongside the executable,
+  with its own license and provenance. WSL2, WebView2 and Windows GPU drivers
+  remain explicit host requirements.
+- **P-05 — MOSS source pin could silently fall back:** a failed requested ref
+  could fall back to default-branch code and even ignore a failed checkout.
+  `ensure_moss_source` now fetches the requested ref explicitly, supports commit
+  SHAs and fails without changing an existing checkout when the ref is absent.
+  A local Git regression tests missing refs on fresh and existing checkouts,
+  successful exact-commit checkout, and preservation after failure.
+- **P-06 — Dependencies could not be prepared separately from weights:** added
+  `install_model.sh runtimes FAMILY`, a separate dispatch for the nine isolated
+  runtime families. Its test exercises every family with only dependency
+  helpers available, and rejects unknown families. No API route was added.
+
+The clean main setup completed with real success stamps and import checks for
+ACE-Step and Stable Audio, plus installed pinned ComfyUI and Manager. The
+release preparation helper passed offline assembly, repeat-run, corrupt-part,
+and existing-image preservation checks. Image export, restoration and final
+publication evidence belongs in the separate preinstalled-release report.
