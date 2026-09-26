@@ -73,8 +73,9 @@ Windows will usually prompt for this during `wsl --install`.
 
 ### WSL2
 
-WSL2 is the primary Linux backend. Omni Studio's live filesystem is the VHDX
-at `wsl/ext4.vhdx` inside the app folder. The distro that VHDX becomes is
+WSL2 is the primary Linux backend. The preinstalled release creates
+`ext4.vhdx` beside the executable. Older bootstrap installations can instead
+use `wsl/ext4.vhdx` inside the app folder. Windows registers that disk as
 `linbox-Omni_Studio`.
 
 If WSL2 is missing, the launcher can show setup instructions. The one-time
@@ -166,15 +167,17 @@ Typical siblings of `Omni_Studio.exe`:
 
 - `app.json` — names the distro `linbox-Omni_Studio` and the start command
 - `webview.dll` — WebView2 interop
-- `linux/ubuntu-base.tar.gz` — bootstrap rootfs used on first import
-- `wsl/ext4.vhdx` — the live Linux disk (large, sparse, not a cache)
+- `Prepare-Omni.cmd`, `Prepare-Omni.ps1`, `release-manifest.json` — image preparation
+- `linux/rootfs.tar.gz` — preinstalled Linux image assembled before first launch
+- `ext4.vhdx` — live Linux disk after import; older installs can use `wsl/ext4.vhdx`
+- `runtime/python/` and Microsoft runtime DLLs — bundled Windows helpers
 - `bridge.py`, `bridge_watchdog.py`, `omni-cli.bat`, `omni-cli`
 - `server/`, `cli/`, `docs/`, `manual/`
 
 **Keep the app folder together.** For a transfer, use a cleanly stopped/exported
 package and verify its WSL registration on the destination. Windows stores
 distro registration separately from the app folder. Do not
-drag `Omni_Studio.exe` to the desktop by itself. Do not delete `wsl/ext4.vhdx`
+drag `Omni_Studio.exe` to the desktop by itself. Do not delete the registered VHDX
 to "save space" unless you intend to destroy every installed model and every
 generated file. Do not separate `webview.dll` from the exe.
 

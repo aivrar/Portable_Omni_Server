@@ -2515,3 +2515,34 @@ ACE-Step and Stable Audio, plus installed pinned ComfyUI and Manager. The
 release preparation helper passed offline assembly, repeat-run, corrupt-part,
 and existing-image preservation checks. Image export, restoration and final
 publication evidence belongs in the separate preinstalled-release report.
+
+### Fresh-image import documentation correction
+
+- **P-09 — Preinstalled import disk location differed from bootstrap:** the
+  fresh-registration test showed that the launcher's `WslRegisterDistribution`
+  path creates `ext4.vhdx` beside the executable. The older minimal-base
+  bootstrap uses an explicit `wsl --import` into `wsl/`. Instructions had
+  described the latter path for both cases. The overview, first-run, shutdown,
+  portability, repository-layout and packaging guides now distinguish them.
+  The actual fresh registration was WSL2 with its BasePath set to the relocated
+  application folder. Both layouts remain excluded from Git by `*.vhdx`.
+
+- **P-10 — Windows CLI quoted-distro transport failed:** on the tested WSL
+  host, passing a quoted `-d` name directly from a batch file returned
+  `WSL_E_DISTRO_NOT_FOUND`, while the same unquoted name succeeded. The batch
+  shim now delegates argument handling to `omni-cli.ps1`, preserving the
+  `OMNI_WSL_DISTRO` override and child exit code. The actual relocated package
+  passes `--help` and an authenticated `workers list` request against the fresh
+  gateway. This Windows-only repair does not change the exported Linux image.
+
+### P-02 / P-03 release qualification update
+
+The separate clean image completed full dependency setup, export, actual
+eight-part preparation, and launcher-driven import into a fresh WSL2
+registration from a relocated folder. Startup, authentication, empty runtime
+registries, browser navigation, native icons, the packaged CLI and graceful
+shutdown passed. The personal studio remained healthy. The
+[preinstalled release report](2026-09-25-preinstalled-release.md) records image
+hashes and exact scope. This addresses the missing distributable image and
+fresh-registration/relocation checks on the current host; it does not claim
+testing on another physical PC/account or infer model-generation results.

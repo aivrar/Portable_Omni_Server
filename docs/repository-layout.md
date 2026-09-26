@@ -24,11 +24,12 @@ durable evidence, and generated runtime state at a glance.
   see [Windows icon packaging](windows-icon.md).
 - `reports/`: current investigation plans and findings that remain useful.
 - `bridge.py`, `bridge_watchdog.py`, `windows_loopback_relay.py`, `app.json`,
-  `omni-cli`, and `omni-cli.bat`: launcher, relay, and CLI entry points.
+  `omni-cli`, `omni-cli.bat`, and `omni-cli.ps1`: launcher, relay, and CLI entry points.
 
 ## Local packaged runtime artifacts
 
-- `wsl/ext4.vhdx`: the live WSL distro filesystem. Its apparent size can be
+- `ext4.vhdx` (preinstalled-image import) or `wsl/ext4.vhdx` (older bootstrap
+  and explicit imports): the live WSL distro filesystem. Its apparent size can be
   large and sparse; never treat it as a disposable cache or commit it to Git.
 - `linux/ubuntu-base.tar.gz` and `linux/rootfs.setup_hash`: local distro
   bootstrap inputs used by the packaged launcher.

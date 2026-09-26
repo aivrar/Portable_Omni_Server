@@ -12,7 +12,8 @@ before you click Chat.
    **disk headroom** on the drive that holds the app.
 2. Confirm the folder still contains `Omni_Studio.exe`, `webview.dll`,
    `app.json`, `bridge.py`, `bridge_watchdog.py`, `runtime/`, and `linux/`.
-   The launcher creates `wsl/` when importing the distro.
+   The preinstalled-image import creates `ext4.vhdx` beside the executable.
+   Older bootstrap installations can use `wsl/ext4.vhdx` instead.
    **Keep the app folder together.**
 3. Close other GPU-heavy apps if this is the first boot. First-time WSL CUDA
    initialization plus gateway start is slower when the card is already full.
@@ -179,7 +180,8 @@ Edge on Windows, use 9200, or stay inside the WebView.
 
 - **Moving only the exe.** The distro disk and WebView2 library stay behind.
   Keep the app folder together.
-- **Deleting `wsl/ext4.vhdx` because it looks large.** That file *is* your
+- **Deleting `ext4.vhdx` because it looks large.** The registered disk, beside
+  the executable or under `wsl/` in older installations, *is* your
   studio. Sparse size on disk can be smaller than the number Explorer shows.
 - **Opening the UI and immediately starting Comfy, ACE-Step, Music 3, and a
   7B chat worker.** They fight for VRAM. Start one family, use it, unload it.

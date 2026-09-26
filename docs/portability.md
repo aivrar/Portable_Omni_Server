@@ -34,8 +34,8 @@ engine's supported inputs and behavior.
 - WSL2 with hardware virtualization enabled.
 - Microsoft WebView2 Runtime for the desktop window.
 - A compatible NVIDIA GPU and Windows driver for CUDA workloads.
-- Free space on the Windows drive containing the app, plus room for the
-  selected model weights and generated media.
+- At least 80 GiB free on the Windows drive containing the app for image
+  preparation/import, plus room for selected model weights and generated media.
 
 WSL2, Windows GPU drivers and WebView2 are host components. They are not stored
 in the Linux disk. Microsoft provides the [WSL installation guide](https://learn.microsoft.com/en-us/windows/wsl/install),
@@ -48,8 +48,9 @@ and [WebView2 Runtime guidance](https://learn.microsoft.com/en-us/microsoft-edge
    and extract it to the drive where the studio will live.
 2. Run `Prepare-Omni.cmd`. It downloads the numbered preinstalled-image parts,
    verifies SHA-256 checksums, and assembles `linux/rootfs.tar.gz`.
-3. Launch `Omni_Studio.exe`. The launcher imports the image into `wsl/` and
-   registers `linbox-Omni_Studio`. The Linux AI dependencies are already installed.
+3. Launch `Omni_Studio.exe`. The launcher imports the image, creating
+   `ext4.vhdx` beside the executable, and registers `linbox-Omni_Studio`.
+   The Linux AI dependencies are already installed.
 4. Download the model weights you want inside the app.
 
 For an offline transfer, download every numbered image part into `linux/parts/`
@@ -58,7 +59,9 @@ installation. Missing weights, community nodes, gated access and updates can
 still require internet access.
 
 Keep the entire app folder together, including `runtime/python/` and the
-runtime DLLs. The `wsl/` disk grows as models and media are added. The app's
+runtime DLLs. Older bootstrap installations and explicit `wsl --import`
+installations may instead keep their disk under `wsl/`. The registered disk
+grows as models and media are added. The app's
 inside-distro free-space display is distinct from the Windows drive's physical
 free space; check both before a large download.
 

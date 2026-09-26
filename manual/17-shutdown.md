@@ -79,7 +79,8 @@ install; retry the variant after the next launch.
 
 ## After Shutdown
 
-The Linux distro `linbox-Omni_Studio` still exists on disk (`wsl/ext4.vhdx`).
+The Linux distro `linbox-Omni_Studio` still exists on disk (`ext4.vhdx` beside
+the executable for this release, or `wsl/ext4.vhdx` in older installations).
 Models and output stay inside the distro. Double-click `Omni_Studio.exe`
 again to reconnect. First GPU use after a full stop may wait on CUDA
 bring-up again.

@@ -90,8 +90,9 @@ the exact source boundary and checks.
 - [x] Create the public repository and push the initial commit to `main`.
 - [x] Apply and verify the description, 20 topics, manual homepage and MIT license.
 - [x] Enable the repository wiki.
-- [ ] Populate the separate wiki after the maintainer creates its first page;
-  adapt manual/image links for that checkout. The in-repo manual is available now.
+- [x] Populate the separate wiki after the maintainer created its first page;
+  publish all 23 manual pages, navigation and 18 reviewed screenshots with
+  working wiki/image links.
 
 ## Packaged release work
 
@@ -106,7 +107,15 @@ ports. Gateway/audio state checks, offline runtime imports, CPU Comfy startup,
 714-node discovery, empty queues, browser navigation, native window icons and
 graceful shutdown passed. Exact Ubuntu source packages and dependency/license
 inventories accompany the release. The personal working disk is not a build
-input. Final image export/import and publication are recorded separately.
+input. Exact image export/import and publication results are recorded in the
+[preinstalled release report](../reports/2026-09-25-preinstalled-release.md).
+
+The 14.2 GiB compressed image passed eight-part assembly and a fresh WSL2
+registration driven by the packaged launcher. Desktop/browser startup,
+authentication, runtime presence, CLI access, icons and graceful shutdown
+passed. First import and connected-browser qualification took about ten
+minutes on this host. The release delivers the preinstalled image alongside
+the Windows ZIP; model weights remain separate.
 
 Release notes must list included engines, whether weights are included or
 downloaded on demand, host requirements, known capability limits, and the exact

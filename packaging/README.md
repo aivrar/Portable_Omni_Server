@@ -17,7 +17,8 @@ NVIDIA driver remain host requirements.
 - For offline preparation, place all parts in `linux/parts/` and run
   `Prepare-Omni.cmd -Offline`. Verified parts are retained for resuming and can
   be removed after successful first launch.
-- The launcher imports that image into its own `wsl/` directory on first use.
+- The launcher's preinstalled-image import creates `ext4.vhdx` beside the exe
+  on first use. Older bootstrap installations can use `wsl/ext4.vhdx` instead.
   An existing `linbox-Omni_Studio` registration is reused; the package is not an
   automatic replacement or migration tool for an existing studio.
 
